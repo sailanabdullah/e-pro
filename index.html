@@ -1,13 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="E-Pro — smart digital solutions for your next big idea.">
+  <title>E-Pro | Build Something Better</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #68738a;
+      --primary: #5b5ce2;
+      --primary-dark: #4445c7;
+      --surface: #ffffff;
+      --page: #f6f7ff;
+      --line: #e7e9f3;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--surface);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .navbar {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,255,255,.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231,233,243,.85);
+    }
+    .nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 1.35rem; font-weight: 800; letter-spacing: -.06em; }
+    .brand-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: var(--primary); color: white; letter-spacing: 0; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: var(--muted); font-size: .94rem; }
+    .nav-links a:hover, .footer-links a:hover { color: var(--primary); }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 12px; font-weight: 700; transition: transform .2s, background .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--primary); color: white; box-shadow: 0 8px 22px rgba(91,92,226,.22); }
+    .button-primary:hover { background: var(--primary-dark); }
+    .button-light { background: white; color: var(--ink); border: 1px solid var(--line); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: white; border-radius: 10px; padding: 8px 12px; font-size: 1.2rem; cursor: pointer; }
+    .hero { overflow: hidden; position: relative; padding: 100px 0 92px; background: radial-gradient(ellipse at 78% 20%, #e7e7ff 0, transparent 38%), linear-gradient(135deg, #f8f9ff 0%, #fff 68%); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 64px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; color: var(--primary-dark); background: #eeeeff; border-radius: 999px; font-size: .82rem; font-weight: 750; }
+    .eyebrow-dot { width: 7px; height: 7px; background: #7778f1; border-radius: 50%; }
+    h1 { margin: 22px 0 18px; max-width: 640px; font-size: clamp(2.7rem, 5.4vw, 4.7rem); line-height: 1.06; letter-spacing: -.065em; }
+    h1 span { color: var(--primary); }
+    .hero-copy { max-width: 540px; color: var(--muted); font-size: 1.1rem; margin: 0 0 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .trust-note { margin-top: 24px; color: var(--muted); font-size: .88rem; }
+    .visual { min-height: 390px; display: grid; place-items: center; position: relative; }
+    .orb { width: min(340px, 80vw); aspect-ratio: 1; border-radius: 36% 64% 60% 40% / 40% 38% 62% 60%; background: linear-gradient(145deg, #8586ff, #5556d9 62%, #3839a9); transform: rotate(-9deg); box-shadow: 0 35px 80px rgba(74,75,199,.25); position: relative; }
+    .orb::before, .orb::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.45); border-radius: 50%; inset: 12%; transform: rotate(38deg) scaleX(.55); }
+    .orb::after { inset: 23% 5%; transform: rotate(-38deg) scaleX(.7); }
+    .orb-symbol { position: absolute; inset: 0; display: grid; place-items: center; color: white; font-size: 6.5rem; font-weight: 900; letter-spacing: -.1em; text-shadow: 0 8px 25px rgba(30,30,100,.25); transform: rotate(9deg); }
+    .float-card { position: absolute; z-index: 1; padding: 14px 18px; border: 1px solid rgba(255,255,255,.9); border-radius: 16px; background: rgba(255,255,255,.9); box-shadow: 0 14px 40px rgba(34,40,80,.12); backdrop-filter: blur(12px); }
+    .float-card strong { display: block; font-size: .98rem; }
+    .float-card small { color: var(--muted); }
+    .card-top { top: 30px; right: 0; }
+    .card-bottom { bottom: 28px; left: 0; }
+    .mini-icon { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 8px; border-radius: 9px; background: #ededff; color: var(--primary); font-weight: 800; }
+    .features { padding: 76px 0; }
+    .section-heading { max-width: 650px; margin: 0 auto 42px; text-align: center; }
+    .section-heading h2 { margin: 0 0 12px; font-size: clamp(2rem, 3.5vw, 2.8rem); letter-spacing: -.05em; line-height: 1.15; }
+    .section-heading p { color: var(--muted); margin: 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .feature-card { padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: white; }
+    .feature-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 18px; border-radius: 14px; background: #eeeeff; color: var(--primary); font-size: 1.35rem; }
+    .feature-card h3 { margin: 0 0 8px; font-size: 1.15rem; }
+    .feature-card p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .cta { padding: 0 0 82px; }
+    .cta-panel { display: flex; justify-content: space-between; align-items: center; gap: 28px; padding: 42px; border-radius: 26px; color: white; background: linear-gradient(120deg, #5556d9, #7778f1); }
+    .cta-panel h2 { margin: 0 0 8px; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -.04em; }
+    .cta-panel p { margin: 0; color: #e6e6ff; }
+    .cta-panel .button { flex-shrink: 0; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .copyright { color: var(--muted); font-size: .88rem; }
+    .footer-links { display: flex; gap: 22px; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 800px) {
+      .hero { padding: 72px 0 60px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 25px; }
+      .hero-content { text-align: center; }
+      .hero-copy { margin-inline: auto; }
+      .hero-actions { justify-content: center; }
+      .visual { min-height: 340px; }
+      .orb { width: 280px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .cta-panel { align-items: flex-start; flex-direction: column; padding: 32px; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(100% - 32px, 1120px); }
+      .nav-inner { min-height: 68px; flex-wrap: wrap; padding: 12px 0; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0; padding-bottom: 8px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 4px; }
+      .nav-cta { display: none; }
+      .hero { padding-top: 54px; }
+      h1 { font-size: clamp(2.55rem, 12vw, 3.5rem); }
+      .hero-copy { font-size: 1rem; }
+      .visual { min-height: 290px; }
+      .orb { width: 230px; }
+      .orb-symbol { font-size: 5rem; }
+      .float-card { padding: 10px 12px; }
+      .card-top { right: -3px; top: 15px; }
+      .card-bottom { left: -3px; bottom: 14px; }
+      .features { padding: 58px 0; }
+      .cta { padding-bottom: 56px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+  </style>
 </head>
 <body>
-    <p>changes</p>
-    <p>new chnages</p>
+  <header class="navbar">
+    <nav class="container nav-inner" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="E-Pro home"><span class="brand-mark">E</span><span>E-Pro</span></a>
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="button button-primary nav-cta" href="#contact">Let’s Talk <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Your ideas, made real</div>
+          <h1>Make your next big idea <span>happen.</span></h1>
+          <p class="hero-copy">A smarter way to bring your ideas to life. E-Pro helps you move forward with thoughtful digital experiences built around your goals.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#features">Explore what we do <span aria-hidden="true">→</span></a>
+            <a class="button button-light" href="#about">Discover E-Pro</a>
+          </div>
+          <p class="trust-note">Thoughtful design. Practical solutions. Better possibilities.</p>
+        </div>
+        <div class="visual" aria-label="Abstract E-Pro brand illustration">
+          <div class="float-card card-top"><strong><span class="mini-icon">✦</span>Creative thinking</strong><small>Ideas into action</small></div>
+          <div class="orb"><div class="orb-symbol">E</div></div>
+          <div class="float-card card-bottom"><strong><span class="mini-icon">↗</span>Made for growth</strong><small>Built around your goals</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Everything starts with a good idea.</h2>
+          <p>We bring clarity, creativity, and care to every step of your digital journey.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">✧</div>
+            <h3>Thoughtful Design</h3>
+            <p>Clean, intuitive experiences that make it easier for people to connect with what matters.</p>
+          </article>
+          <article class="feature-card" id="about">
+            <div class="feature-icon" aria-hidden="true">⌘</div>
+            <h3>Smart Solutions</h3>
+            <p>Practical, flexible digital solutions designed to help turn challenges into opportunities.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">↗</div>
+            <h3>Ready to Grow</h3>
+            <p>A solid starting point that can evolve as your ideas, projects, and ambitions grow.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <h2>Ready to get started?</h2>
+            <p>Let’s turn your next idea into something meaningful.</p>
+          </div>
+          <a class="button button-light" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#home"><span class="brand-mark">E</span><span>E-Pro</span></a>
+      <span class="copyright">© <span id="year"></span> E-Pro. All rights reserved.</span>
+      <div class="footer-links"><a href="#home">Home</a><a href="#features">Features</a><a href="#contact">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
