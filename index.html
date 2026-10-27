@@ -1,1120 +1,1211 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="E-Pro — smarter digital experiences for bold ideas." />
-  <title>E-Pro | Build Something Better</title>
-  <style>
-    :root {
-      --ink: #121c2d;
-      --muted: #61708a;
-      --primary: #5a5de8;
-      --primary-dark: #474bd8;
-      --primary-soft: #eef0ff;
-      --page: #f6f8ff;
-      --surface: #ffffff;
-      --line: #e7ebf5;
-      --gold: #ffba4a;
-      --success: #20a36d;
-      --shadow: 0 28px 60px rgba(22, 26, 54, 0.12);
-      --shadow-soft: 0 18px 38px rgba(18, 28, 45, 0.06);
-      --lavender: #f3f0ff;
-      --sky: #edf6ff;
-      --warm: #fff7eb;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--surface);
-      color: var(--ink);
-      line-height: 1.6;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(1170px, calc(100% - 36px)); margin-inline: auto; }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(231, 235, 245, 0.9);
-    }
-    .nav-inner {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: -.06em;
-      font-size: 1.35rem;
-    }
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--primary), #7178ff);
-      color: white;
-      border-radius: 12px;
-      font-weight: 900;
-      box-shadow: 0 14px 24px rgba(91, 93, 232, 0.24);
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      color: var(--muted);
-      font-size: .95rem;
-      font-weight: 600;
-    }
-    .nav-links a { transition: color .2s ease; }
-    .nav-links a:hover, .footer-links a:hover { color: var(--primary); }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      white-space: nowrap;
-    }
-    .button:hover { transform: translateY(-2px); }
-    .button-primary {
-      background: linear-gradient(135deg, var(--primary), #6f73ff);
-      color: white;
-      box-shadow: 0 16px 28px rgba(90, 93, 232, 0.22);
-    }
-    .button-primary:hover { background: linear-gradient(135deg, var(--primary-dark), #5a5de8); }
-    .button-light {
-      color: var(--ink);
-      background: white;
-      border: 1px solid var(--line);
-      box-shadow: 0 8px 18px rgba(18, 28, 45, 0.04);
-    }
-    .menu-toggle {
-      display: none;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: white;
-      padding: 8px 12px;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 92px 0 66px;
-      background:
-        radial-gradient(circle at 78% 20%, rgba(120, 122, 255, 0.16), transparent 25%),
-        linear-gradient(135deg, #f8f9ff 0%, #ffffff 68%);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      align-items: center;
-      gap: 62px;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      font-size: .8rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      background: var(--primary-soft);
-      letter-spacing: .02em;
-    }
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #8084ff;
-      box-shadow: 0 0 0 6px rgba(128,132,255,0.12);
-    }
-    h1 {
-      margin: 22px 0 18px;
-      max-width: 640px;
-      font-size: clamp(2.8rem, 5.5vw, 5rem);
-      line-height: 1.03;
-      letter-spacing: -.065em;
-    }
-    h1 span { color: var(--primary); }
-    .hero-copy {
-      max-width: 560px;
-      margin: 0 0 28px;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      list-style: none;
-      padding: 0;
-      margin: 28px 0 0;
-    }
-    .stats li {
-      min-width: 136px;
-      padding: 14px 18px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: 0 10px 22px rgba(18,28,45,0.02);
-    }
-    .stats strong {
-      display: block;
-      font-size: 1.2rem;
-      letter-spacing: -.04em;
-      line-height: 1.1;
-      margin-bottom: 5px;
-    }
-    .stats span {
-      color: var(--muted);
-      font-size: .8rem;
-    }
-
-    .visual {
-      position: relative;
-      min-height: 440px;
-      display: grid;
-      place-items: center;
-    }
-    .dashboard {
-      position: relative;
-      width: min(470px, 92%);
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 32px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(244,246,255,0.82));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-    .dash-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--line);
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--primary-dark);
-      font-size: .76rem;
-      font-weight: 800;
-    }
-    .dot-group {
-      display: flex;
-      gap: 6px;
-    }
-    .dot-group span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-    .dot-group span:nth-child(1) { background: #f3b1b1; }
-    .dot-group span:nth-child(2) { background: #f2d06e; }
-    .dot-group span:nth-child(3) { background: #7ed7a1; }
-
-    .chart-box {
-      height: 170px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, #f3f5ff 0%, #ffffff 100%);
-      border: 1px solid var(--line);
-      position: relative;
-      overflow: hidden;
-    }
-    .chart-box::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(91,93,232,0.04) 1px, transparent 1px), linear-gradient(to top, rgba(91,93,232,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .chart-line {
-      position: absolute;
-      inset: 18px 14px 18px 14px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(91,93,232,0.1), rgba(91,93,232,0));
-      clip-path: polygon(0 62%, 12% 57%, 25% 70%, 39% 46%, 55% 52%, 72% 32%, 88% 38%, 100% 16%, 100% 100%, 0 100%);
-    }
-    .chart-line::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(91,93,232,0.9), transparent 100%);
-      clip-path: polygon(0 62%, 12% 57%, 25% 70%, 39% 46%, 55% 52%, 72% 32%, 88% 38%, 100% 16%, 100% 100%, 0 100%);
-      mix-blend-mode: multiply;
-    }
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 16px;
-    }
-    .mini-panel {
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid var(--line);
-    }
-    .mini-panel span {
-      display: block;
-      color: var(--muted);
-      font-size: .75rem;
-      margin-bottom: 5px;
-    }
-    .mini-panel strong {
-      font-size: 1.5rem;
-      letter-spacing: -.06em;
-    }
-    .mini-panel small {
-      color: var(--success);
-      font-weight: 700;
-      font-size: .74rem;
-    }
-
-    .float-card {
-      position: absolute;
-      z-index: 2;
-      padding: 14px 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: 0 18px 40px rgba(30,36,58,0.12);
-      backdrop-filter: blur(10px);
-    }
-    .float-card strong {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .96rem;
-    }
-    .float-card small { color: var(--muted); }
-    .card-top { top: 30px; right: 8px; }
-    .card-bottom { bottom: 22px; left: 10px; }
-    .mini-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 9px;
-      background: #ededff;
-      color: var(--primary);
-      font-weight: 900;
-    }
-
-    .trust-strip {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: #fafbff;
-    }
-    .logo-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px 34px;
-      padding: 22px 0;
-      color: #9aa5b8;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: .74rem;
-    }
-
-    .section {
-      padding: 86px 0;
-    }
-    .section-heading {
-      max-width: 700px;
-      margin: 0 auto 42px;
-      text-align: center;
-    }
-    .section-heading h2 {
-      margin: 0 0 10px;
-      font-size: clamp(2.1rem, 3vw, 3rem);
-      line-height: 1.15;
-      letter-spacing: -.055em;
-    }
-    .section-heading p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 20px;
-    }
-    .feature-card {
-      padding: 28px 24px;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: 0 14px 32px rgba(17,23,42,0.02);
-      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(91,93,232,0.22);
-      box-shadow: 0 20px 40px rgba(91,93,232,0.08);
-    }
-    .feature-icon {
-      display: grid;
-      place-items: center;
-      width: 52px;
-      height: 52px;
-      margin-bottom: 18px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #efefff, #e7f2ff);
-      color: var(--primary);
-      font-size: 1.35rem;
-      font-weight: 800;
-    }
-    .feature-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.14rem;
-    }
-    .feature-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .95rem;
-    }
-
-    .showcase {
-      background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 100%);
-    }
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 42px;
-      align-items: center;
-    }
-    .eyebrow-alt {
-      background: #f5f1ff;
-      color: #634ec8;
-    }
-    .showcase-copy h2 {
-      margin: 18px 0 18px;
-      font-size: clamp(2.1rem, 3vw, 3rem);
-      line-height: 1.15;
-      letter-spacing: -.06em;
-    }
-    .showcase-copy p {
-      margin: 0 0 24px;
-      color: var(--muted);
-      max-width: 540px;
-    }
-    .check-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px 18px;
-    }
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-    }
-    .check-item::before {
-      content: "✓";
-      display: inline-grid;
-      place-items: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: rgba(32,163,109,0.12);
-      color: var(--success);
-      font-size: .8rem;
-      font-weight: 900;
-    }
-
-    .showcase-panel {
-      padding: 28px;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-    }
-    .metric-list {
-      display: grid;
-      gap: 16px;
-      margin-top: 22px;
-    }
-    .metric-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 15px 16px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, #fafbff 0%, #ffffff 100%);
-      border: 1px solid var(--line);
-    }
-    .metric-item strong {
-      display: block;
-      font-size: 1.2rem;
-      letter-spacing: -.05em;
-    }
-    .metric-item span {
-      color: var(--muted);
-      font-size: .8rem;
-    }
-    .chip {
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(91,93,232,0.08);
-      color: var(--primary-dark);
-      font-weight: 800;
-      font-size: .72rem;
-    }
-
-    .spotlight {
-      background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
-    }
-    .work-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      gap: 20px;
-    }
-    .project-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 300px;
-      padding: 28px 24px;
-      border-radius: 26px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-    }
-    .project-card.featured {
-      background: linear-gradient(135deg, #1d2349 0%, #2d3f8d 40%, #5a5de8 100%);
-      color: white;
-      border-color: rgba(255,255,255,0.08);
-      box-shadow: 0 24px 52px rgba(49, 60, 130, 0.28);
-    }
-    .project-tag {
-      display: inline-flex;
-      align-self: flex-start;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: .72rem;
-      font-weight: 800;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-    .project-card h3 {
-      margin: 18px 0 12px;
-      font-size: clamp(1.5rem, 2vw, 2rem);
-      letter-spacing: -.04em;
-      line-height: 1.2;
-    }
-    .project-card p {
-      margin: 0;
-      color: inherit;
-      opacity: 0.82;
-    }
-    .project-points {
-      list-style: none;
-      padding: 0;
-      margin: 18px 0 0;
-      display: grid;
-      gap: 10px;
-      font-size: .92rem;
-      font-weight: 600;
-    }
-    .project-points li::before {
-      content: "•";
-      margin-right: 8px;
-      color: #dfe2ff;
-    }
-    .project-preview {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.16);
-    }
-    .project-metric {
-      display: grid;
-      gap: 4px;
-    }
-    .project-metric strong {
-      font-size: 1.5rem;
-      letter-spacing: -.06em;
-    }
-    .project-metric span {
-      opacity: .75;
-      font-size: .8rem;
-    }
-    .mini-badge {
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
-      font-size: .7rem;
-      font-weight: 800;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-    .project-card:not(.featured) .project-tag {
-      background: rgba(91, 93, 232, 0.08);
-      border-color: rgba(91, 93, 232, 0.08);
-      color: var(--primary-dark);
-    }
-    .project-card:not(.featured) .project-points li::before {
-      color: var(--primary);
-    }
-    .project-card:not(.featured) .project-preview {
-      border-top-color: var(--line);
-    }
-    .project-card:not(.featured) .mini-badge {
-      background: rgba(91, 93, 232, 0.08);
-      color: var(--primary-dark);
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-    .step-card {
-      position: relative;
-      padding: 30px 24px 22px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: white;
-    }
-    .step-number {
-      width: 42px;
-      height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-      border-radius: 12px;
-      background: rgba(91,93,232,0.1);
-      color: var(--primary);
-      font-weight: 900;
-    }
-    .step-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.18rem;
-    }
-    .step-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .testimonials {
-      background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
-    }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-    .quote-card {
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: white;
-      box-shadow: 0 12px 30px rgba(17,23,42,0.02);
-    }
-    .stars {
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-    .quote-card p {
-      margin: 0 0 18px;
-      color: var(--ink);
-    }
-    .person {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--line);
-    }
-    .avatar {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ebedff, #dfe9ff);
-      color: var(--primary);
-      font-weight: 800;
-    }
-    .person strong { display: block; }
-    .person small { color: var(--muted); }
-
-    .cta {
-      padding: 0 0 80px;
-    }
-    .cta-panel {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-      padding: 38px 42px;
-      border-radius: 30px;
-      color: white;
-      background: linear-gradient(120deg, #5158d8, #7c80f6 58%, #8d8ef4);
-      box-shadow: 0 26px 56px rgba(88, 92, 216, 0.28);
-    }
-    .cta-panel h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      letter-spacing: -.045em;
-    }
-    .cta-panel p {
-      margin: 0;
-      color: rgba(255,255,255,0.8);
-    }
-    .cta-panel .button { flex-shrink: 0; }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0 34px;
-      background: white;
-    }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .copyright {
-      color: var(--muted);
-      font-size: .88rem;
-    }
-    .footer-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: .9rem;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid,
-      .showcase-grid,
-      .work-grid {
-        grid-template-columns: 1fr;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="E-Pro — smarter digital experiences for bold ideas."
+    />
+    <title>E-Pro | Build Something Better</title>
+    <style>
+      :root {
+        --ink: #121c2d;
+        --muted: #61708a;
+        --primary: #5a5de8;
+        --primary-dark: #474bd8;
+        --primary-soft: #eef0ff;
+        --page: #f6f8ff;
+        --surface: #ffffff;
+        --line: #e7ebf5;
+        --gold: #ffba4a;
+        --success: #20a36d;
+        --shadow: 0 28px 60px rgba(22, 26, 54, 0.12);
+        --shadow-soft: 0 18px 38px rgba(18, 28, 45, 0.06);
+        --lavender: #f3f0ff;
+        --sky: #edf6ff;
+        --warm: #fff7eb;
       }
-      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .process-grid, .testimonial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cta-panel { flex-direction: column; align-items: flex-start; }
-    }
 
-    @media (max-width: 700px) {
-      .feature-grid, .process-grid, .testimonial-grid, .check-list { grid-template-columns: 1fr; }
-      .nav-inner { min-height: 68px; flex-wrap: wrap; padding: 12px 0; }
-      .menu-toggle { display: block; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--surface);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      .container { width: min(1170px, calc(100% - 36px)); margin-inline: auto; }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(255, 255, 255, 0.84);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(231, 235, 245, 0.9);
+      }
+
+      .nav-inner {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: -.06em;
+        font-size: 1.35rem;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--primary), #7178ff);
+        color: white;
+        border-radius: 12px;
+        font-weight: 900;
+        box-shadow: 0 14px 24px rgba(91, 93, 232, 0.24);
+      }
+
       .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 600;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px 4px; }
-      .nav-cta { display: none; }
-      .hero { padding-top: 52px; }
-      .float-card { padding: 10px 12px; }
-      .card-top { top: 10px; right: 0; }
-      .card-bottom { left: 0; bottom: 10px; }
-      .logo-row { gap: 14px 18px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
-      .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cta-panel { padding: 28px 26px; }
-    }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; }
-    }
-  </style>
-</head>
-<body>
-  <header class="navbar">
-    <nav class="container nav-inner" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="E-Pro home"><span class="brand-mark">E</span><span>E-Pro</span></a>
-      <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
-      <div class="nav-links" id="nav-links">
-        <a href="#home">Home</a>
-        <a href="#features">Services</a>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <a class="button button-primary nav-cta" href="#contact">Let’s Talk <span aria-hidden="true">↗</span></a>
-    </nav>
-  </header>
+      .nav-links a { transition: color 0.2s ease; }
+      .nav-links a:hover, .footer-links a:hover { color: var(--primary); }
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <div class="eyebrow"><span class="eyebrow-dot"></span> Your ideas, made real</div>
-          <h1>Make your next big idea <span>happen.</span></h1>
-          <p class="hero-copy">A smarter way to turn vision into momentum. E-Pro helps businesses and founders build standout digital experiences that attract attention, build trust, and grow faster across every touchpoint.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#features">Explore what we do <span aria-hidden="true">→</span></a>
-            <a class="button button-light" href="#about">Discover E-Pro</a>
-          </div>
-          <ul class="stats" aria-label="Key stats">
-            <li><strong>120+</strong><span>Projects launched</span></li>
-            <li><strong>4.9/5</strong><span>Client rating</span></li>
-            <li><strong>3x</strong><span>Faster execution</span></li>
-          </ul>
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 20px;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .button:hover { transform: translateY(-2px); }
+
+      .button-primary {
+        background: linear-gradient(135deg, var(--primary), #6f73ff);
+        color: white;
+        box-shadow: 0 16px 28px rgba(90, 93, 232, 0.22);
+      }
+
+      .button-primary:hover { background: linear-gradient(135deg, var(--primary-dark), #5a5de8); }
+
+      .button-light {
+        color: var(--ink);
+        background: white;
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 18px rgba(18, 28, 45, 0.04);
+      }
+
+      .menu-toggle {
+        display: none;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: white;
+        padding: 8px 12px;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 92px 0 66px;
+        background:
+          radial-gradient(circle at 78% 20%, rgba(120, 122, 255, 0.16), transparent 25%),
+          linear-gradient(135deg, #f8f9ff 0%, #ffffff 68%);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: center;
+        gap: 62px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+        background: var(--primary-soft);
+        letter-spacing: 0.02em;
+      }
+
+      .eyebrow-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #8084ff;
+        box-shadow: 0 0 0 6px rgba(128, 132, 255, 0.12);
+      }
+
+      h1 {
+        margin: 22px 0 18px;
+        max-width: 640px;
+        font-size: clamp(2.8rem, 5.5vw, 5rem);
+        line-height: 1.03;
+        letter-spacing: -.065em;
+      }
+
+      h1 span { color: var(--primary); }
+
+      .hero-copy {
+        max-width: 560px;
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        list-style: none;
+        padding: 0;
+        margin: 28px 0 0;
+      }
+
+      .stats li {
+        min-width: 136px;
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 10px 22px rgba(18, 28, 45, 0.02);
+      }
+
+      .stats strong {
+        display: block;
+        font-size: 1.2rem;
+        letter-spacing: -.04em;
+        line-height: 1.1;
+        margin-bottom: 5px;
+      }
+
+      .stats span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .visual {
+        position: relative;
+        min-height: 440px;
+        display: grid;
+        place-items: center;
+      }
+
+      .dashboard {
+        position: relative;
+        width: min(470px, 92%);
+        padding: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 32px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(244, 246, 255, 0.82));
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .dash-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: var(--primary-soft);
+        color: var(--primary-dark);
+        font-size: 0.76rem;
+        font-weight: 800;
+      }
+
+      .dot-group {
+        display: flex;
+        gap: 6px;
+      }
+
+      .dot-group span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .dot-group span:nth-child(1) { background: #f3b1b1; }
+      .dot-group span:nth-child(2) { background: #f2d06e; }
+      .dot-group span:nth-child(3) { background: #7ed7a1; }
+
+      .chart-box {
+        height: 170px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, #f3f5ff 0%, #ffffff 100%);
+        border: 1px solid var(--line);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .chart-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, rgba(91, 93, 232, 0.04) 1px, transparent 1px), linear-gradient(to top, rgba(91, 93, 232, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
+      .chart-line {
+        position: absolute;
+        inset: 18px 14px 18px 14px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(91, 93, 232, 0.1), rgba(91, 93, 232, 0));
+        clip-path: polygon(0 62%, 12% 57%, 25% 70%, 39% 46%, 55% 52%, 72% 32%, 88% 38%, 100% 16%, 100% 100%, 0 100%);
+      }
+
+      .chart-line::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent 0%, rgba(91, 93, 232, 0.9), transparent 100%);
+        clip-path: polygon(0 62%, 12% 57%, 25% 70%, 39% 46%, 55% 52%, 72% 32%, 88% 38%, 100% 16%, 100% 100%, 0 100%);
+        mix-blend-mode: multiply;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .mini-panel {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: white;
+        border: 1px solid var(--line);
+      }
+
+      .mini-panel span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.75rem;
+        margin-bottom: 5px;
+      }
+
+      .mini-panel strong {
+        font-size: 1.5rem;
+        letter-spacing: -.06em;
+      }
+
+      .mini-panel small {
+        color: var(--success);
+        font-weight: 700;
+        font-size: 0.74rem;
+      }
+
+      .float-card {
+        position: absolute;
+        z-index: 2;
+        padding: 14px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 18px 40px rgba(30, 36, 58, 0.12);
+        backdrop-filter: blur(10px);
+      }
+
+      .float-card strong {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.96rem;
+      }
+
+      .float-card small { color: var(--muted); }
+      .card-top { top: 30px; right: 8px; }
+      .card-bottom { bottom: 22px; left: 10px; }
+
+      .mini-icon {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: #ededff;
+        color: var(--primary);
+        font-weight: 900;
+      }
+
+      .trust-strip {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: #fafbff;
+      }
+
+      .logo-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 24px 34px;
+        padding: 22px 0;
+        color: #9aa5b8;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.74rem;
+      }
+
+      .section { padding: 86px 0; }
+
+      .section-heading {
+        max-width: 700px;
+        margin: 0 auto 42px;
+        text-align: center;
+      }
+
+      .section-heading h2 {
+        margin: 0 0 10px;
+        font-size: clamp(2.1rem, 3vw, 3rem);
+        line-height: 1.15;
+        letter-spacing: -.055em;
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .feature-card {
+        padding: 28px 24px;
+        background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        box-shadow: 0 14px 32px rgba(17, 23, 42, 0.02);
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(91, 93, 232, 0.22);
+        box-shadow: 0 20px 40px rgba(91, 93, 232, 0.08);
+      }
+
+      .feature-icon {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        margin-bottom: 18px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #efefff, #e7f2ff);
+        color: var(--primary);
+        font-size: 1.35rem;
+        font-weight: 800;
+      }
+
+      .feature-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.14rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .showcase {
+        background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 100%);
+      }
+
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 42px;
+        align-items: center;
+      }
+
+      .eyebrow-alt {
+        background: #f5f1ff;
+        color: #634ec8;
+      }
+
+      .showcase-copy h2 {
+        margin: 18px 0 18px;
+        font-size: clamp(2.1rem, 3vw, 3rem);
+        line-height: 1.15;
+        letter-spacing: -.06em;
+      }
+
+      .showcase-copy p {
+        margin: 0 0 24px;
+        color: var(--muted);
+        max-width: 540px;
+      }
+
+      .check-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 18px;
+      }
+
+      .check-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+      }
+
+      .check-item::before {
+        content: "✓";
+        display: inline-grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(32, 163, 109, 0.12);
+        color: var(--success);
+        font-size: 0.8rem;
+        font-weight: 900;
+      }
+
+      .showcase-panel {
+        padding: 28px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .metric-list {
+        display: grid;
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .metric-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 15px 16px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #fafbff 0%, #ffffff 100%);
+        border: 1px solid var(--line);
+      }
+
+      .metric-item strong {
+        display: block;
+        font-size: 1.2rem;
+        letter-spacing: -.05em;
+      }
+
+      .metric-item span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .chip {
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: rgba(91, 93, 232, 0.08);
+        color: var(--primary-dark);
+        font-weight: 800;
+        font-size: 0.72rem;
+      }
+
+      .spotlight {
+        background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+      }
+
+      .work-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        gap: 20px;
+      }
+
+      .project-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 300px;
+        padding: 28px 24px;
+        border-radius: 26px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+      }
+
+      .project-card.featured {
+        background: linear-gradient(135deg, #1d2349 0%, #2d3f8d 40%, #5a5de8 100%);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 24px 52px rgba(49, 60, 130, 0.28);
+      }
+
+      .project-tag {
+        display: inline-flex;
+        align-self: flex-start;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .project-card h3 {
+        margin: 18px 0 12px;
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        letter-spacing: -.04em;
+        line-height: 1.2;
+      }
+
+      .project-card p {
+        margin: 0;
+        color: inherit;
+        opacity: 0.82;
+      }
+
+      .project-points {
+        list-style: none;
+        padding: 0;
+        margin: 18px 0 0;
+        display: grid;
+        gap: 10px;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+
+      .project-points li::before {
+        content: "•";
+        margin-right: 8px;
+        color: #dfe2ff;
+      }
+
+      .project-preview {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+      }
+
+      .project-metric {
+        display: grid;
+        gap: 4px;
+      }
+
+      .project-metric strong {
+        font-size: 1.5rem;
+        letter-spacing: -.06em;
+      }
+
+      .project-metric span {
+        opacity: 0.75;
+        font-size: 0.8rem;
+      }
+
+      .mini-badge {
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.12);
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .project-card:not(.featured) .project-tag {
+        background: rgba(91, 93, 232, 0.08);
+        border-color: rgba(91, 93, 232, 0.08);
+        color: var(--primary-dark);
+      }
+
+      .project-card:not(.featured) .project-points li::before {
+        color: var(--primary);
+      }
+
+      .project-card:not(.featured) .project-preview {
+        border-top-color: var(--line);
+      }
+
+      .project-card:not(.featured) .mini-badge {
+        background: rgba(91, 93, 232, 0.08);
+        color: var(--primary-dark);
+      }
+
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .step-card {
+        position: relative;
+        padding: 30px 24px 22px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: white;
+      }
+
+      .step-number {
+        width: 42px;
+        height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+        border-radius: 12px;
+        background: rgba(91, 93, 232, 0.1);
+        color: var(--primary);
+        font-weight: 900;
+      }
+
+      .step-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.18rem;
+      }
+
+      .step-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .testimonials {
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .quote-card {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: white;
+        box-shadow: 0 12px 30px rgba(17, 23, 42, 0.02);
+      }
+
+      .stars {
+        color: var(--gold);
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+      }
+
+      .quote-card p {
+        margin: 0 0 18px;
+        color: var(--ink);
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ebedff, #dfe9ff);
+        color: var(--primary);
+        font-weight: 800;
+      }
+
+      .person strong { display: block; }
+      .person small { color: var(--muted); }
+
+      .cta {
+        padding: 0 0 80px;
+      }
+
+      .cta-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 38px 42px;
+        border-radius: 30px;
+        color: white;
+        background: linear-gradient(120deg, #5158d8, #7c80f6 58%, #8d8ef4);
+        box-shadow: 0 26px 56px rgba(88, 92, 216, 0.28);
+      }
+
+      .cta-panel h2 {
+        margin: 0 0 8px;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        letter-spacing: -.045em;
+      }
+
+      .cta-panel p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .cta-panel .button { flex-shrink: 0; }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 28px 0 34px;
+        background: white;
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .copyright {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .footer-links {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .showcase-grid,
+        .work-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .process-grid, .testimonial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .cta-panel { flex-direction: column; align-items: flex-start; }
+      }
+
+      @media (max-width: 700px) {
+        .feature-grid, .process-grid, .testimonial-grid, .check-list { grid-template-columns: 1fr; }
+        .nav-inner { min-height: 68px; flex-wrap: wrap; padding: 12px 0; }
+        .menu-toggle { display: block; }
+        .nav-links {
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding-bottom: 8px;
+        }
+        .nav-links.open { display: flex; }
+        .nav-links a { padding: 12px 4px; }
+        .nav-cta { display: none; }
+        .hero { padding-top: 52px; }
+        .float-card { padding: 10px 12px; }
+        .card-top { top: 10px; right: 0; }
+        .card-bottom { left: 0; bottom: 10px; }
+        .logo-row { gap: 14px 18px; }
+        .footer-inner { flex-direction: column; align-items: flex-start; }
+        .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .cta-panel { padding: 28px 26px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <nav class="container nav-inner" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="E-Pro home"><span class="brand-mark">E</span><span>E-Pro</span></a>
+        <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+        <div class="nav-links" id="nav-links">
+          <a href="#home">Home</a>
+          <a href="#features">Services</a>
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
         </div>
+        <a class="button button-primary nav-cta" href="#contact">Let’s Talk <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
 
-        <div class="visual" aria-label="E-Pro product overview">
-          <div class="float-card card-top"><strong><span class="mini-icon">✦</span>Creative thinking</strong><small>Ideas into action</small></div>
-
-          <div class="dashboard">
-            <div class="dash-top">
-              <span class="badge">Live growth dashboard</span>
-              <div class="dot-group" aria-hidden="true"><span></span><span></span><span></span></div>
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> Your ideas, made real</div>
+            <h1>Make your next big idea <span>happen.</span></h1>
+            <p class="hero-copy">
+              A smarter way to turn vision into momentum. E-Pro helps founders and teams build standout digital experiences that attract attention, build trust, and grow fast.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#features">Explore what we do <span aria-hidden="true">→</span></a>
+              <a class="button button-light" href="#about">Discover E-Pro</a>
             </div>
-            <div class="chart-box"><div class="chart-line" aria-hidden="true"></div></div>
-            <div class="mini-grid">
-              <div class="mini-panel">
-                <span>Conversion uplift</span>
-                <strong>+38%</strong>
-                <small>↑ 12.4%</small>
-              </div>
-              <div class="mini-panel">
-                <span>Leads generated</span>
-                <strong>2.8k</strong>
-                <small>↑ 26%</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="float-card card-bottom"><strong><span class="mini-icon">↗</span>Made for growth</strong><small>Built around your goals</small></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="trust-strip" aria-label="Trusted by modern teams">
-      <div class="container logo-row">
-        <span>Strategy</span>
-        <span>Brand</span>
-        <span>Launch</span>
-        <span>Growth</span>
-        <span>Design</span>
-        <span>Digital</span>
-      </div>
-    </div>
-
-    <section class="section" id="features">
-      <div class="container">
-        <div class="section-heading">
-          <h2>Everything starts with a good idea.</h2>
-          <p>We turn complexity into clarity through strategy, design, and execution.</p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">✧</div>
-            <h3>Brand Strategy</h3>
-            <p>Position your business with messaging that connects to your audience and stands out.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">⌘</div>
-            <h3>Product Design</h3>
-            <p>Build intuitive experiences that make your offer easier to understand and easier to trust.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">✦</div>
-            <h3>Web Experience</h3>
-            <p>Craft polished digital touchpoints that feel premium, modern, and conversion-ready.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">↗</div>
-            <h3>Launch Support</h3>
-            <p>Move from plan to launch with a clear process that keeps your momentum strong.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section showcase" id="about">
-      <div class="container showcase-grid">
-        <div class="showcase-copy">
-          <div class="eyebrow eyebrow-alt"><span class="eyebrow-dot"></span> Why E-Pro</div>
-          <h2>We blend strategy, storytelling, and technical clarity.</h2>
-          <p>Every decision is shaped by your goals, your audience, and the outcome you want to create. We help brands build digital experiences that feel thoughtful, persuasive, and ready to grow with them.</p>
-
-          <div class="check-list">
-            <div class="check-item">Brand-first thinking</div>
-            <div class="check-item">Clear user journeys</div>
-            <div class="check-item">Conversion-focused design</div>
-            <div class="check-item">Responsive modern builds</div>
-          </div>
-        </div>
-
-        <div class="showcase-panel">
-          <div class="badge">Performance snapshot</div>
-          <div class="metric-list">
-            <div class="metric-item">
-              <div>
-                <strong>72%</strong>
-                <span>Average engagement lift</span>
-              </div>
-              <span class="chip">+24%</span>
-            </div>
-            <div class="metric-item">
-              <div>
-                <strong>2.5x</strong>
-                <span>Better lead quality</span>
-              </div>
-              <span class="chip">Faster</span>
-            </div>
-            <div class="metric-item">
-              <div>
-                <strong>6 weeks</strong>
-                <span>Typical launch timeline</span>
-              </div>
-              <span class="chip">Efficient</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section spotlight" id="work">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow eyebrow-alt"><span class="eyebrow-dot"></span> Recent wins</div>
-          <h2>Designed to convert attention into action.</h2>
-          <p>We build momentum through sharp strategy, thoughtful product thinking, and high-converting experiences.</p>
-        </div>
-
-        <div class="work-grid">
-          <article class="project-card featured">
-            <div class="project-tag">Case study</div>
-            <div>
-              <h3>Northlane Studio</h3>
-              <p>Reframed a creative agency for premium positioning, stronger conversion, and a clearer offer.</p>
-            </div>
-            <ul class="project-points">
-              <li>Positioning refresh</li>
-              <li>Offer architecture</li>
-              <li>Web experience redesign</li>
+            <ul class="stats" aria-label="Key stats">
+              <li><strong>120+</strong><span>Projects launched</span></li>
+              <li><strong>4.9/5</strong><span>Client rating</span></li>
+              <li><strong>3x</strong><span>Faster execution</span></li>
             </ul>
-            <div class="project-preview">
-              <div class="project-metric">
-                <strong>+61%</strong>
-                <span>Qualified leads</span>
-              </div>
-              <span class="mini-badge">Launch</span>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-tag">Growth</div>
-            <div>
-              <h3>Brightfield</h3>
-              <p>Built a cleaner story and more persuasive funnel for a growing B2B brand.</p>
-            </div>
-            <ul class="project-points">
-              <li>Messaging</li>
-              <li>UX refinement</li>
-              <li>Campaign landing pages</li>
-            </ul>
-            <div class="project-preview">
-              <div class="project-metric">
-                <strong>+44%</strong>
-                <span>Engagement</span>
-              </div>
-              <span class="mini-badge">Strategy</span>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-tag">Launch</div>
-            <div>
-              <h3>Flowly</h3>
-              <p>Transformed an early-stage product site into a polished, trust-building experience.</p>
-            </div>
-            <ul class="project-points">
-              <li>Brand system</li>
-              <li>Landing page</li>
-              <li>Conversion copy</li>
-            </ul>
-            <div class="project-preview">
-              <div class="project-metric">
-                <strong>2.3x</strong>
-                <span>Trials</span>
-              </div>
-              <span class="mini-badge">Design</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section process">
-      <div class="container">
-        <div class="section-heading">
-          <h2>A clear path from idea to impact.</h2>
-          <p>Our process keeps things simple, collaborative, and focused on outcomes.</p>
-        </div>
-
-        <div class="process-grid">
-          <article class="step-card">
-            <div class="step-number">01</div>
-            <h3>Discover</h3>
-            <p>We listen closely, map your goals, and define the problem worth solving before we design.</p>
-          </article>
-          <article class="step-card">
-            <div class="step-number">02</div>
-            <h3>Design</h3>
-            <p>We shape the experience around your audience with thoughtful visuals, messaging, and flow.</p>
-          </article>
-          <article class="step-card">
-            <div class="step-number">03</div>
-            <h3>Launch</h3>
-            <p>We refine, test, and deliver a polished digital presence ready to perform from day one.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section testimonials">
-      <div class="container">
-        <div class="section-heading">
-          <h2>People love how we make it feel easy.</h2>
-          <p>We help teams move from uncertainty to momentum with confidence.</p>
-        </div>
-
-        <div class="testimonial-grid">
-          <article class="quote-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p>“E-Pro helped us turn a rough idea into a polished brand and website that instantly felt more credible.”</p>
-            <div class="person">
-              <div class="avatar">AD</div>
-              <div>
-                <strong>Aisha D.</strong>
-                <small>Founder, Northlane Studio</small>
-              </div>
-            </div>
-          </article>
-
-          <article class="quote-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p>“They brought clarity to our message, improved the flow of our site, and made the whole process feel effortless.”</p>
-            <div class="person">
-              <div class="avatar">SM</div>
-              <div>
-                <strong>Samir M.</strong>
-                <small>Marketing Lead, Arc & Co.</small>
-              </div>
-            </div>
-          </article>
-
-          <article class="quote-card">
-            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <p>“The result felt premium, strategic, and practical. It gave our team a stronger digital presence from day one.”</p>
-            <div class="person">
-              <div class="avatar">NR</div>
-              <div>
-                <strong>Nia R.</strong>
-                <small>Director, Brightfield Group</small>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta" id="contact">
-      <div class="container">
-        <div class="cta-panel">
-          <div>
-            <h2>Ready to get started?</h2>
-            <p>Let’s turn your next idea into something meaningful.</p>
           </div>
-          <a class="button button-light" href="mailto:hello@e-pro.studio">Get in touch <span aria-hidden="true">↗</span></a>
+
+          <div class="visual" aria-label="E-Pro product overview">
+            <div class="float-card card-top"><strong><span class="mini-icon">✦</span>Creative thinking</strong><small>Ideas into action</small></div>
+
+            <div class="dashboard">
+              <div class="dash-top">
+                <span class="badge">Live growth dashboard</span>
+                <div class="dot-group" aria-hidden="true"><span></span><span></span><span></span></div>
+              </div>
+              <div class="chart-box"><div class="chart-line" aria-hidden="true"></div></div>
+              <div class="mini-grid">
+                <div class="mini-panel">
+                  <span>Conversion uplift</span>
+                  <strong>+38%</strong>
+                  <small>↑ 12.4%</small>
+                </div>
+                <div class="mini-panel">
+                  <span>Leads generated</span>
+                  <strong>2.8k</strong>
+                  <small>↑ 26%</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="float-card card-bottom"><strong><span class="mini-icon">↗</span>Made for growth</strong><small>Built around your goals</small></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="trust-strip" aria-label="Trusted by modern teams">
+        <div class="container logo-row">
+          <span>Strategy</span>
+          <span>Brand</span>
+          <span>Launch</span>
+          <span>Growth</span>
+          <span>Design</span>
+          <span>Digital</span>
         </div>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <a class="brand" href="#home"><span class="brand-mark">E</span><span>E-Pro</span></a>
-      <span class="copyright">© <span id="year"></span> E-Pro. All rights reserved.</span>
-      <div class="footer-links"><a href="#home">Home</a><a href="#features">Services</a><a href="#work">Work</a><a href="#contact">Contact</a></div>
-    </div>
-  </footer>
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Everything starts with a good idea.</h2>
+            <p>We turn complexity into clarity through strategy, design, and execution.</p>
+          </div>
 
-  <script>
-    const menuButton = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">✧</div>
+              <h3>Brand Strategy</h3>
+              <p>Position your business with messaging that connects to your audience and stands out.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">⌘</div>
+              <h3>Product Design</h3>
+              <p>Build intuitive experiences that make your offer easier to understand and easier to trust.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">✦</div>
+              <h3>Web Experience</h3>
+              <p>Craft polished digital touchpoints that feel premium, modern, and conversion-ready.</p>
+            </article>
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">↗</div>
+              <h3>Launch Support</h3>
+              <p>Move from plan to launch with a clear process that keeps your momentum strong.</p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-    if (menuButton && navLinks) {
-      menuButton.addEventListener('click', () => {
-        const isOpen = navLinks.classList.toggle('open');
-        menuButton.setAttribute('aria-expanded', String(isOpen));
-        menuButton.textContent = isOpen ? '✕' : '☰';
-      });
+      <section class="section showcase" id="about">
+        <div class="container showcase-grid">
+          <div class="showcase-copy">
+            <div class="eyebrow eyebrow-alt"><span class="eyebrow-dot"></span> Why E-Pro</div>
+            <h2>We blend strategy, storytelling, and technical clarity.</h2>
+            <p>
+              Every decision is shaped by your goals, your audience, and the outcome you want to create. We help brands build digital experiences that feel thoughtful, persuasive, and ready to grow.
+            </p>
 
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-          menuButton.setAttribute('aria-expanded', 'false');
-          menuButton.textContent = '��';
+            <div class="check-list">
+              <div class="check-item">Brand-first thinking</div>
+              <div class="check-item">Clear user journeys</div>
+              <div class="check-item">Conversion-focused design</div>
+              <div class="check-item">Responsive modern builds</div>
+            </div>
+          </div>
+
+          <div class="showcase-panel">
+            <div class="badge">Performance snapshot</div>
+            <div class="metric-list">
+              <div class="metric-item">
+                <div>
+                  <strong>72%</strong>
+                  <span>Average engagement lift</span>
+                </div>
+                <span class="chip">+24%</span>
+              </div>
+              <div class="metric-item">
+                <div>
+                  <strong>2.5x</strong>
+                  <span>Better lead quality</span>
+                </div>
+                <span class="chip">Faster</span>
+              </div>
+              <div class="metric-item">
+                <div>
+                  <strong>6 weeks</strong>
+                  <span>Typical launch timeline</span>
+                </div>
+                <span class="chip">Efficient</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section spotlight" id="work">
+        <div class="container">
+          <div class="section-heading">
+            <div class="eyebrow eyebrow-alt"><span class="eyebrow-dot"></span> Recent wins</div>
+            <h2>Designed to convert attention into action.</h2>
+            <p>We build momentum through sharp strategy, thoughtful product thinking, and high-converting experiences.</p>
+          </div>
+
+          <div class="work-grid">
+            <article class="project-card featured">
+              <div class="project-tag">Case study</div>
+              <div>
+                <h3>Northlane Studio</h3>
+                <p>Reframed a creative agency for premium positioning, stronger conversion, and a clearer offer.</p>
+              </div>
+              <ul class="project-points">
+                <li>Positioning refresh</li>
+                <li>Offer architecture</li>
+                <li>Web experience redesign</li>
+              </ul>
+              <div class="project-preview">
+                <div class="project-metric">
+                  <strong>+61%</strong>
+                  <span>Qualified leads</span>
+                </div>
+                <span class="mini-badge">Launch</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-tag">Growth</div>
+              <div>
+                <h3>Brightfield</h3>
+                <p>Built a cleaner story and more persuasive funnel for a growing B2B brand.</p>
+              </div>
+              <ul class="project-points">
+                <li>Messaging</li>
+                <li>UX refinement</li>
+                <li>Campaign landing pages</li>
+              </ul>
+              <div class="project-preview">
+                <div class="project-metric">
+                  <strong>+44%</strong>
+                  <span>Engagement</span>
+                </div>
+                <span class="mini-badge">Strategy</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-tag">Launch</div>
+              <div>
+                <h3>Flowly</h3>
+                <p>Transformed an early-stage product site into a polished, trust-building experience.</p>
+              </div>
+              <ul class="project-points">
+                <li>Brand system</li>
+                <li>Landing page</li>
+                <li>Conversion copy</li>
+              </ul>
+              <div class="project-preview">
+                <div class="project-metric">
+                  <strong>2.3x</strong>
+                  <span>Trials</span>
+                </div>
+                <span class="mini-badge">Design</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Simple process. Strong outcomes.</h2>
+            <p>We keep momentum clear from strategy to launch so your next move feels confident and aligned.</p>
+          </div>
+
+          <div class="process-grid">
+            <article class="step-card">
+              <div class="step-number">01</div>
+              <h3>Discover</h3>
+              <p>We clarify your audience, offer, and positioning so the message is built around what matters most.</p>
+            </article>
+            <article class="step-card">
+              <div class="step-number">02</div>
+              <h3>Design</h3>
+              <p>We shape the experience visually and strategically so every touchpoint feels premium and purposeful.</p>
+            </article>
+            <article class="step-card">
+              <div class="step-number">03</div>
+              <h3>Launch</h3>
+              <p>We prepare and refine your final build so you can move with clarity and confidence into the market.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section testimonials">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Trusted by teams building what's next.</h2>
+            <p>Our clients rely on us to turn big ideas into polished experiences that feel credible and ready to scale.</p>
+          </div>
+
+          <div class="testimonial-grid">
+            <article class="quote-card">
+              <div class="stars" aria-label="Five stars">★★★★★</div>
+              <p>“E-Pro brought clarity to our brand and gave us a digital presence that finally matched the quality of our work.”</p>
+              <div class="person">
+                <div class="avatar">A</div>
+                <div>
+                  <strong>Alicia Moore</strong>
+                  <small>Founder, Northlane</small>
+                </div>
+              </div>
+            </article>
+
+            <article class="quote-card">
+              <div class="stars" aria-label="Five stars">★★★★★</div>
+              <p>“The strategy and execution felt thoughtful from day one. We saw better lead quality almost immediately.”</p>
+              <div class="person">
+                <div class="avatar">J</div>
+                <div>
+                  <strong>Jared Flynn</strong>
+                  <small>Marketing Lead, Brightfield</small>
+                </div>
+              </div>
+            </article>
+
+            <article class="quote-card">
+              <div class="stars" aria-label="Five stars">★★★★★</div>
+              <p>“They translated a complex product into a simpler story and helped us look more credible than ever.”</p>
+              <div class="person">
+                <div class="avatar">S</div>
+                <div>
+                  <strong>Sophia Chen</strong>
+                  <small>CEO, Flowly</small>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div class="container">
+          <div class="cta-panel">
+            <div>
+              <h2>Ready to build something better?</h2>
+              <p>Let’s shape a digital experience that tells your story clearly and performs with purpose.</p>
+            </div>
+            <a class="button button-light" href="mailto:hello@e-pro.studio">Start your project</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <div class="brand" aria-label="E-Pro footer brand"><span class="brand-mark">E</span><span>E-Pro</span></div>
+        <div class="copyright">© 2026 E-Pro. Crafted for bold ideas.</div>
+        <div class="footer-links" aria-label="Footer links">
+          <a href="#features">Services</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open');
+          menuToggle.setAttribute('aria-expanded', String(isOpen));
         });
-      });
-    }
-
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-  </script>
-</body>
+      }
+    </script>
+  </body>
 </html>
