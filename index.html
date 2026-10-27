@@ -1,833 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="E-Pro — smarter digital solutions for bold ideas and modern growth.">
-  <title>E-Pro | Build Something Better</title>
-  <style>
-    :root {
-      --ink: #172033;
-      --muted: #68738a;
-      --primary: #5b5ce2;
-      --primary-strong: #494bd9;
-      --primary-soft: #efefff;
-      --accent: #ffb86b;
-      --surface: #ffffff;
-      --page: #f6f7ff;
-      --line: #e7eaf5;
-      --success: #1fb67a;
-      --shadow: 0 24px 65px rgba(37, 45, 90, 0.12);
-      --radius: 24px;
-      --max: 1160px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: var(--surface);
-      line-height: 1.6;
-    }
-
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    button, input, textarea { font: inherit; }
-
-    .container {
-      width: min(var(--max), calc(100% - 40px));
-      margin-inline: auto;
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(231, 234, 245, 0.9);
-    }
-
-    .nav-inner {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.38rem;
-      font-weight: 900;
-      letter-spacing: -0.06em;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--primary), #7e82ff);
-      color: white;
-      box-shadow: 0 12px 26px rgba(91, 92, 226, 0.24);
-      font-size: 1.05rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      color: var(--muted);
-      font-size: 0.96rem;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      position: relative;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      width: 100%;
-      height: 2px;
-      background: var(--primary);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.2s ease;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after { transform: scaleX(1); }
-
-    .nav-links a:hover,
-    .footer-links a:hover { color: var(--primary); }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 20px;
-      border-radius: 12px;
-      font-weight: 800;
-      border: 1px solid transparent;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .button:hover { transform: translateY(-2px); }
-
-    .button-primary {
-      background: linear-gradient(135deg, var(--primary), #7a7cf6);
-      color: white;
-      box-shadow: 0 12px 24px rgba(91, 92, 226, 0.25);
-    }
-
-    .button-primary:hover {
-      background: linear-gradient(135deg, var(--primary-strong), #6669ed);
-    }
-
-    .button-light {
-      background: white;
-      color: var(--ink);
-      border-color: var(--line);
-      box-shadow: 0 8px 18px rgba(14, 18, 35, 0.04);
-    }
-
-    .menu-toggle {
-      display: none;
-      border: 1px solid var(--line);
-      background: white;
-      color: var(--ink);
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 100px 0 92px;
-      background:
-        radial-gradient(circle at 82% 18%, rgba(122, 124, 246, 0.22), transparent 20%),
-        linear-gradient(135deg, #f8f9ff 0%, #ffffff 52%, #f6f7ff 100%);
-    }
-
-    .hero-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      align-items: center;
-      gap: 64px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 14px;
-      color: var(--primary-strong);
-      background: var(--primary-soft);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-
-    .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 0 6px rgba(91, 92, 226, 0.12);
-    }
-
-    h1 {
-      margin: 22px 0 18px;
-      max-width: 640px;
-      font-size: clamp(2.8rem, 5vw, 4.9rem);
-      line-height: 1.04;
-      letter-spacing: -0.065em;
-    }
-
-    h1 span {
-      color: var(--primary);
-    }
-
-    .hero-copy {
-      max-width: 540px;
-      margin: 0 0 30px;
-      color: var(--muted);
-      font-size: 1.12rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .trust-note {
-      margin-top: 24px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 32px;
-    }
-
-    .stat {
-      min-width: 120px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.8rem;
-      line-height: 1.1;
-      letter-spacing: -0.06em;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .visual {
-      position: relative;
-      min-height: 430px;
-      display: grid;
-      place-items: center;
-    }
-
-    .orb {
-      position: relative;
-      width: min(380px, 80vw);
-      aspect-ratio: 1;
-      border-radius: 36% 64% 60% 40% / 40% 38% 62% 60%;
-      background: linear-gradient(145deg, #8a8bff, #5556d9 60%, #3839a9);
-      transform: rotate(-10deg);
-      box-shadow: 0 35px 70px rgba(77, 85, 212, 0.25);
-      animation: float 5s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: rotate(-9deg) translateY(0); }
-      50% { transform: rotate(-10deg) translateY(-10px); }
-    }
-
-    .orb::before,
-    .orb::after {
-      content: "";
-      position: absolute;
-      border: 1px solid rgba(255,255,255,0.45);
-      border-radius: 50%;
-      inset: 12%;
-      transform: rotate(38deg) scaleX(0.56);
-    }
-
-    .orb::after {
-      inset: 21% 8%;
-      transform: rotate(-38deg) scaleX(0.72);
-    }
-
-    .orb-symbol {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: rgba(255,255,255,0.96);
-      font-size: 6.8rem;
-      font-weight: 900;
-      letter-spacing: -0.1em;
-      text-shadow: 0 20px 30px rgba(32, 32, 110, 0.25);
-    }
-
-    .float-card {
-      position: absolute;
-      z-index: 2;
-      padding: 14px 18px;
-      border: 1px solid rgba(255,255,255,0.9);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 18px 40px rgba(28, 32, 52, 0.12);
-      backdrop-filter: blur(10px);
-    }
-
-    .float-card strong {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.98rem;
-      letter-spacing: -0.03em;
-    }
-
-    .float-card small {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.74rem;
-    }
-
-    .card-top { top: 34px; right: 10px; }
-    .card-bottom { bottom: 18px; left: 14px; }
-
-    .mini-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 9px;
-      background: #ededff;
-      color: var(--primary);
-      font-weight: 900;
-    }
-
-    .features {
-      padding: 78px 0 10px;
-      background: linear-gradient(180deg, #ffffff 0%, #f7f8ff 100%);
-    }
-
-    .section-heading {
-      max-width: 700px;
-      margin: 0 auto 42px;
-      text-align: center;
-    }
-
-    .section-heading h2 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 3vw, 2.9rem);
-      letter-spacing: -0.05em;
-      line-height: 1.18;
-    }
-
-    .section-heading p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.04rem;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .feature-card {
-      padding: 30px 28px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: white;
-      box-shadow: 0 10px 24px rgba(22, 30, 52, 0.02);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(91, 92, 226, 0.35);
-    }
-
-    .feature-icon {
-      width: 54px;
-      height: 54px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 18px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #f0f1ff, #e6e7ff);
-      color: var(--primary);
-      font-size: 1.45rem;
-      font-weight: 700;
-    }
-
-    .feature-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.2rem;
-      letter-spacing: -0.04em;
-    }
-
-    .feature-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .showcase {
-      padding: 90px 0 60px;
-    }
-
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 36px;
-      align-items: center;
-      padding: 30px;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: linear-gradient(135deg, #ffffff, #f8f8ff);
-      box-shadow: var(--shadow);
-    }
-
-    .showcase-copy h2 {
-      margin: 0 0 16px;
-      font-size: clamp(2rem, 3vw, 3rem);
-      letter-spacing: -0.055em;
-      line-height: 1.08;
-    }
-
-    .showcase-copy p {
-      margin: 0 0 28px;
-      color: var(--muted);
-      font-size: 1.02rem;
-    }
-
-    .check-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 14px;
-    }
-
-    .check-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .check {
-      width: 24px;
-      height: 24px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #eafaf3;
-      color: var(--success);
-      font-weight: 900;
-      flex-shrink: 0;
-    }
-
-    .metrics-panel {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      min-height: 320px;
-    }
-
-    .metric-box {
-      padding: 26px 22px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: linear-gradient(180deg, #fff, #f5f6ff);
-    }
-
-    .metric-box.primary {
-      background: linear-gradient(135deg, #5b5ce2, #7a7cf6);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 0 20px 45px rgba(91, 92, 226, 0.26);
-    }
-
-    .metric-box span {
-      color: var(--muted);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-
-    .metric-box.primary span {
-      color: rgba(255,255,255,0.82);
-    }
-
-    .metric-box strong {
-      display: block;
-      margin-top: 14px;
-      font-size: clamp(2rem, 3vw, 2.9rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-    }
-
-    .metric-box p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .metric-box.primary p {
-      color: rgba(255,255,255,0.8);
-    }
-
-    .cta {
-      padding: 32px 0 82px;
-    }
-
-    .cta-panel {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 28px;
-      padding: 42px 38px;
-      border-radius: 28px;
-      color: white;
-      background: linear-gradient(120deg, #5054d9, #7778f1 62%, #8e7bf9);
-      box-shadow: 0 30px 60px rgba(80, 84, 217, 0.23);
-    }
-
-    .cta-panel h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.8rem, 2.5vw, 2.6rem);
-      letter-spacing: -0.04em;
-    }
-
-    .cta-panel p {
-      margin: 0;
-      color: rgba(255,255,255,0.88);
-      font-size: 1.02rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0 38px;
-      background: #fcfcff;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .copyright {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 22px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 600;
-    }
-
-    @media (max-width: 900px) {
-      .hero { padding-top: 76px; }
-      .hero-grid,
-      .showcase-grid { grid-template-columns: 1fr; }
-      .showcase-copy { order: 1; }
-      .metrics-panel { min-height: auto; }
-      .feature-grid { grid-template-columns: 1fr; }
-      .cta-panel {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 32px;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="E-Pro — smarter digital solutions for bold ideas and modern growth."
+    />
+    <title>E-Pro | Build Something Better</title>
+    <style>
+      :root {
+        --ink: #172033;
+        --ink-2: #27314d;
+        --muted: #68738a;
+        --primary: #5858f0;
+        --primary-strong: #4147d9;
+        --primary-soft: #eeefff;
+        --accent: #ffb86b;
+        --accent-soft: #fff2df;
+        --surface: #ffffff;
+        --page: #f6f7ff;
+        --page-strong: #eef2ff;
+        --line: #e7eaf5;
+        --success: #1fb67a;
+        --success-soft: #eafaf3;
+        --shadow: 0 24px 65px rgba(37, 45, 90, 0.12);
+        --shadow-soft: 0 14px 35px rgba(32, 38, 76, 0.08);
+        --radius: 24px;
+        --radius-lg: 32px;
+        --max: 1180px;
       }
-    }
 
-    @media (max-width: 620px) {
-      .container { width: min(100% - 32px, 1160px); }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(99, 93, 255, 0.08), transparent 28%),
+          linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+        line-height: 1.6;
+      }
+
+      img { max-width: 100%; display: block; }
+      a { color: inherit; text-decoration: none; }
+      button, input, textarea { font: inherit; }
+      p { margin: 0; }
+
+      .container {
+        width: min(var(--max), calc(100% - 40px));
+        margin-inline: auto;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(231, 234, 245, 0.9);
+      }
+
       .nav-inner {
-        min-height: 68px;
-        flex-wrap: wrap;
-        padding: 12px 0;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
       }
 
-      .menu-toggle { display: block; }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.35rem;
+        font-weight: 900;
+        letter-spacing: -0.06em;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), #7e82ff);
+        color: white;
+        box-shadow: 0 12px 26px rgba(91, 92, 226, 0.24);
+        font-size: 1.05rem;
+      }
+
       .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        color: var(--muted);
+        font-size: 0.96rem;
+        font-weight: 700;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px 4px; }
-      .nav-cta { display: none; }
 
-      .hero { padding-top: 54px; }
-      h1 { font-size: clamp(2.6rem, 12vw, 3.7rem); }
-      .hero-copy { font-size: 1rem; }
-      .hero-stats { gap: 18px; }
-      .visual { min-height: 300px; }
-      .orb { width: 230px; }
-      .orb-symbol { font-size: 5rem; }
-      .float-card { padding: 10px 12px; }
-      .card-top { right: -2px; top: 18px; }
-      .card-bottom { left: -2px; bottom: 12px; }
+      .nav-links a {
+        position: relative;
+        transition: color 0.2s ease;
+      }
 
-      .features { padding-top: 58px; }
-      .showcase { padding-top: 76px; }
-      .showcase-grid { padding: 18px; }
-      .metrics-panel { grid-template-columns: 1fr; }
-      .cta { padding-bottom: 56px; }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a:focus-visible::after { transform: scaleX(1); }
+      .nav-links a:hover,
+      .footer-links a:hover { color: var(--primary); }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-weight: 800;
+        border: 1px solid transparent;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button-primary {
+        background: linear-gradient(135deg, var(--primary), #7a7cf6);
+        color: white;
+        box-shadow: 0 12px 24px rgba(91, 92, 226, 0.25);
+      }
+
+      .button-primary:hover {
+        background: linear-gradient(135deg, var(--primary-strong), #6669ed);
+      }
+
+      .button-light {
+        background: white;
+        color: var(--ink);
+        border-color: var(--line);
+        box-shadow: 0 8px 18px rgba(14, 18, 35, 0.04);
+      }
+
+      .menu-toggle {
+        display: none;
+        border: 1px solid var(--line);
+        background: white;
+        color: var(--ink);
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 100px 0 92px;
+        background:
+          radial-gradient(circle at 82% 18%, rgba(122, 124, 246, 0.28), transparent 18%),
+          linear-gradient(135deg, #f8f9ff 0%, #ffffff 52%, #f6f7ff 100%);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 20% 8% auto auto;
+        width: 440px;
+        height: 440px;
+        background: rgba(91, 92, 226, 0.05);
+        filter: blur(44px);
+        border-radius: 50%;
+      }
+
+      .hero-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: center;
+        gap: 64px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 8px 14px;
+        color: var(--primary-strong);
+        background: var(--primary-soft);
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+      }
+
+      .eyebrow-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 0 6px rgba(91, 92, 226, 0.12);
+      }
+
+      h1 {
+        margin: 22px 0 18px;
+        max-width: 640px;
+        font-size: clamp(2.8rem, 5vw, 5.1rem);
+        line-height: 0.98;
+        letter-spacing: -0.075em;
+      }
+
+      h1 span {
+        color: var(--primary);
+      }
+
+      .hero-copy {
+        max-width: 550px;
+        margin: 0 0 30px;
+        color: var(--muted);
+        font-size: 1.12rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .trust-note {
+        margin-top: 26px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .hero-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 34px;
+      }
+
+      .stat {
+        min-width: 120px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.8rem;
+        line-height: 1.1;
+        letter-spacing: -0.06em;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .visual {
+        position: relative;
+        min-height: 430px;
+        display: grid;
+        place-items: center;
+      }
+
+      .orb {
+        position: relative;
+        width: min(390px, 80vw);
+        aspect-ratio: 1;
+        border-radius: 36% 64% 60% 40% / 40% 38% 62% 60%;
+        background: linear-gradient(145deg, #8a8bff, #5556d9 60%, #3839a9);
+        transform: rotate(-10deg);
+        box-shadow: 0 35px 70px rgba(77, 85, 212, 0.25);
+        animation: float 5s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: rotate(-9deg) translateY(0); }
+        50% { transform: rotate(-10deg) translateY(-10px); }
+      }
+
+      .orb::before,
+      .orb::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(255,255,255,0.45);
+        border-radius: 50%;
+        inset: 12%;
+        transform: rotate(38deg) scaleX(0.56);
+      }
+
+      .orb::after {
+        inset: 21% 8%;
+        transform: rotate(-38deg) scaleX(0.72);
+      }
+
+      .orb-symbol {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: rgba(255,255,255,0.96);
+        font-size: 6.8rem;
+        font-weight: 900;
+        letter-spacing: -0.1em;
+        text-shadow: 0 20px 30px rgba(32, 32, 110, 0.25);
+      }
+
+      .float-card {
+        position: absolute;
+        z-index: 2;
+        padding: 14px 18px;
+        border: 1px solid rgba(255,255,255,0.9);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 18px 40px rgba(28, 32, 52, 0.12);
+        backdrop-filter: blur(10px);
+      }
+
+      .float-card strong {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.98rem;
+        letter-spacing: -0.03em;
+      }
+
+      .float-card small {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+
+      .card-top { top: 34px; right: 10px; }
+      .card-bottom { bottom: 18px; left: 14px; }
+
+      .mini-icon {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: #ededff;
+        color: var(--primary);
+        font-weight: 900;
+      }
+
+      .features {
+        padding: 78px 0 10px;
+        background: linear-gradient(180deg, #ffffff 0%, #f7f8ff 100%);
+      }
+
+      .section-heading {
+        max-width: 700px;
+        margin: 0 auto 42px;
+        text-align: center;
+      }
+
+      .section-heading h2 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 3vw, 2.9rem);
+        letter-spacing: -0.05em;
+        line-height: 1.18;
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.04rem;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .feature-card {
+        padding: 30px 28px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: white;
+        box-shadow: 0 10px 24px rgba(22, 30, 52, 0.02);
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(91, 92, 226, 0.35);
+        box-shadow: 0 18px 30px rgba(91, 92, 226, 0.06);
+      }
+
+      .feature-icon {
+        width: 54px;
+        height: 54px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 18px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #f0f1ff, #e6e7ff);
+        color: var(--primary);
+        font-size: 1.45rem;
+        font-weight: 700;
+      }
+
+      .feature-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+        letter-spacing: -0.04em;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .showcase {
+        padding: 90px 0 60px;
+      }
+
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 36px;
+        align-items: center;
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: linear-gradient(135deg, #ffffff, #f8f8ff);
+        box-shadow: var(--shadow);
+      }
+
+      .showcase-copy h2 {
+        margin: 0 0 16px;
+        font-size: clamp(2rem, 3vw, 3rem);
+        letter-spacing: -0.055em;
+        line-height: 1.08;
+      }
+
+      .showcase-copy p {
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 14px;
+      }
+
+      .check-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .check {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--success-soft);
+        color: var(--success);
+        font-weight: 900;
+        flex-shrink: 0;
+      }
+
+      .metrics-panel {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        min-height: 320px;
+      }
+
+      .metric-box {
+        padding: 26px 22px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: linear-gradient(180deg, #fff, #f5f6ff);
+      }
+
+      .metric-box.primary {
+        background: linear-gradient(135deg, #5b5ce2, #7a7cf6);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 20px 45px rgba(91, 92, 226, 0.26);
+      }
+
+      .metric-box span {
+        color: var(--muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+
+      .metric-box.primary span {
+        color: rgba(255,255,255,0.82);
+      }
+
+      .metric-box strong {
+        display: block;
+        margin-top: 14px;
+        font-size: clamp(2rem, 3vw, 2.9rem);
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .metric-box p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .metric-box.primary p {
+        color: rgba(255,255,255,0.8);
+      }
+
+      .process {
+        padding: 18px 0 90px;
+      }
+
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .process-card {
+        position: relative;
+        padding: 28px 24px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: white;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .step {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-weight: 900;
+        margin-bottom: 18px;
+      }
+
+      .process-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.22rem;
+        letter-spacing: -0.04em;
+      }
+
+      .process-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.97rem;
+      }
+
+      .cta {
+        padding: 32px 0 82px;
+      }
+
+      .cta-panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 28px;
+        padding: 42px 38px;
+        border-radius: 28px;
+        color: white;
+        background: linear-gradient(120deg, #5054d9, #7778f1 62%, #8e7bf9);
+        box-shadow: 0 30px 60px rgba(80, 84, 217, 0.23);
+      }
+
+      .cta-panel h2 {
+        margin: 0 0 10px;
+        font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+        letter-spacing: -0.04em;
+      }
+
+      .cta-panel p {
+        margin: 0;
+        color: rgba(255,255,255,0.88);
+        font-size: 1.02rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 28px 0 38px;
+        background: #fcfcff;
+      }
 
       .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
       }
-    }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; animation: none !important; }
-    }
-  </style>
-</head>
-<body>
-  <header class="navbar">
-    <nav class="container nav-inner" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="E-Pro home">
-        <span class="brand-mark">E</span>
-        <span>E-Pro</span>
-      </a>
+      .copyright {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
 
-      <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+      .footer-links {
+        display: flex;
+        gap: 22px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
 
-      <div class="nav-links" id="nav-links">
-        <a href="#home">Home</a>
-        <a href="#features">Features</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
+      @media (max-width: 900px) {
+        .hero { padding-top: 76px; }
+        .hero-grid,
+        .showcase-grid,
+        .process-grid { grid-template-columns: 1fr; }
+        .showcase-copy { order: 1; }
+        .metrics-panel { min-height: auto; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .cta-panel {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 32px;
+        }
+      }
 
-      <a class="button button-primary nav-cta" href="#contact">Let’s Talk <span aria-hidden="true">↗</span></a>
-    </nav>
-  </header>
+      @media (max-width: 620px) {
+        .container { width: min(100% - 32px, 1160px); }
+        .nav-inner {
+          min-height: 68px;
+          flex-wrap: wrap;
+          padding: 12px 0;
+        }
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <div class="eyebrow"><span class="eyebrow-dot"></span> Smart ideas, built with care</div>
-          <h1>Make your next big idea <span>happen.</span></h1>
-          <p class="hero-copy">E-Pro helps founders, teams, and growing businesses turn vision into momentum with smarter digital experiences designed for real-world growth.</p>
+        .menu-toggle { display: block; }
+        .nav-links {
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding-bottom: 8px;
+        }
+        .nav-links.open { display: flex; }
+        .nav-links a { padding: 12px 4px; }
+        .nav-cta { display: none; }
 
-          <div class="hero-actions">
-            <a class="button button-primary" href="#features">Explore what we do <span aria-hidden="true">→</span></a>
-            <a class="button button-light" href="#about">Discover E-Pro</a>
-          </div>
+        .hero { padding-top: 54px; }
+        h1 { font-size: clamp(2.6rem, 12vw, 3.7rem); }
+        .hero-copy { font-size: 1rem; }
+        .hero-stats { gap: 18px; }
+        .visual { min-height: 300px; }
+        .orb { width: 230px; }
+        .orb-symbol { font-size: 5rem; }
+        .float-card { padding: 10px 12px; }
+        .card-top { right: -2px; top: 18px; }
+        .card-bottom { left: -2px; bottom: 12px; }
 
-          <div class="hero-stats" aria-label="Key business metrics">
-            <div class="stat">
-              <strong>120+</strong>
-              <span>projects launched</span>
+        .features { padding-top: 58px; }
+        .showcase { padding-top: 76px; }
+        .showcase-grid { padding: 18px; }
+        .metrics-panel { grid-template-columns: 1fr; }
+        .cta { padding-bottom: 56px; }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition: none !important; animation: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <nav class="container nav-inner" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="E-Pro home">
+          <span class="brand-mark">E</span>
+          <span>E-Pro</span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+
+        <div class="nav-links" id="nav-links">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <a class="button button-primary nav-cta" href="#contact">Let’s Talk <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> Smart ideas, built with care</div>
+            <h1>Make your next big idea <span>happen.</span></h1>
+            <p class="hero-copy">E-Pro helps founders, teams, and growing businesses turn vision into momentum with smarter digital experiences designed for real-world growth.</p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#features">Explore what we do <span aria-hidden="true">→</span></a>
+              <a class="button button-light" href="#about">Discover E-Pro</a>
             </div>
-            <div class="stat">
-              <strong>4.9/5</strong>
-              <span>average satisfaction</span>
+
+            <div class="hero-stats" aria-label="Key business metrics">
+              <div class="stat">
+                <strong>120+</strong>
+                <span>projects launched</span>
+              </div>
+              <div class="stat">
+                <strong>4.9/5</strong>
+                <span>average satisfaction</span>
+              </div>
+              <div class="stat">
+                <strong>2x</strong>
+                <span>faster launches</span>
+              </div>
             </div>
-            <div class="stat">
-              <strong>2x</strong>
-              <span>faster launches</span>
+
+            <p class="trust-note">Thoughtful design. Practical strategy. Better possibilities.</p>
+          </div>
+
+          <div class="visual" aria-label="Abstract E-Pro brand illustration">
+            <div class="float-card card-top">
+              <strong><span class="mini-icon">✦</span>Creative thinking</strong>
+              <small>Ideas into action</small>
+            </div>
+
+            <div class="orb">
+              <div class="orb-symbol">E</div>
+            </div>
+
+            <div class="float-card card-bottom">
+              <strong><span class="mini-icon">↗</span>Built for growth</strong>
+              <small>Clear goals, real momentum</small>
             </div>
           </div>
-
-          <p class="trust-note">Thoughtful design. Practical strategy. Better possibilities.</p>
         </div>
+      </section>
 
-        <div class="visual" aria-label="Abstract E-Pro brand illustration">
-          <div class="float-card card-top">
-            <strong><span class="mini-icon">✦</span>Creative thinking</strong>
-            <small>Ideas into action</small>
+      <section class="features" id="features">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Everything starts with the right opportunity.</h2>
+            <p>We combine strategy, clarity, and digital craftsmanship to help you move forward with purpose.</p>
           </div>
 
-          <div class="orb">
-            <div class="orb-symbol">E</div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">✧</div>
+              <h3>Thoughtful Design</h3>
+              <p>Clean, intuitive experiences that help your audience feel confident, informed, and ready to act.</p>
+            </article>
+
+            <article class="feature-card" id="about">
+              <div class="feature-icon" aria-hidden="true">⌘</div>
+              <h3>Smart Solutions</h3>
+              <p>Scalable systems and polished digital products designed around your goals, not guesswork.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">↗</div>
+              <h3>Ready to Grow</h3>
+              <p>A strong foundation that evolves with your ideas, your market, and the next chapter of your business.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="showcase" id="about">
+        <div class="container showcase-grid">
+          <div class="showcase-copy">
+            <h2>Built to help you move faster and stand out.</h2>
+            <p>Whether you’re launching something new or refining what already works, E-Pro brings structure, creativity, and clarity to every part of the journey.</p>
+
+            <ul class="check-list">
+              <li><span class="check">✓</span> Smart digital strategy rooted in your real goals.</li>
+              <li><span class="check">✓</span> Seamless experiences that feel premium and easy to use.</li>
+              <li><span class="check">✓</span> Flexible solutions that grow with your next chapter.</li>
+            </ul>
           </div>
 
-          <div class="float-card card-bottom">
-            <strong><span class="mini-icon">↗</span>Built for growth</strong>
-            <small>Clear goals, real momentum</small>
+          <div class="metrics-panel" aria-label="Performance panels">
+            <div class="metric-box primary">
+              <span>Brand impact</span>
+              <strong>+38%</strong>
+              <p>Average lift in engagement after launch.</p>
+            </div>
+
+            <div class="metric-box">
+              <span>Productivity</span>
+              <strong>1.8x</strong>
+              <p>Faster decision-making with streamlined execution.</p>
+            </div>
+
+            <div class="metric-box">
+              <span>Client focus</span>
+              <strong>96%</strong>
+              <p>Clients choose long-term partnerships with us.</p>
+            </div>
+
+            <div class="metric-box">
+              <span>Launch speed</span>
+              <strong>6 wks</strong>
+              <p>Typical timeline to go from concept to live.</p>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <section class="process">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Our process keeps momentum clear.</h2>
+            <p>From strategy to launch, we build with focus, clarity, and measurable progress.</p>
+          </div>
+
+          <div class="process-grid">
+            <article class="process-card">
+              <div class="step">1</div>
+              <h3>Discover</h3>
+              <p>We align around your audience, goals, and opportunities so every decision is grounded in real value.</p>
+            </article>
+
+            <article class="process-card">
+              <div class="step">2</div>
+              <h3>Design</h3>
+              <p>We shape a clear experience, refine the details, and create something memorable without the clutter.</p>
+            </article>
+
+            <article class="process-card">
+              <div class="step">3</div>
+              <h3>Deliver</h3>
+              <p>We move from concept to launch with precision, flexibility, and a strong foundation for growth.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div class="container">
+          <div class="cta-panel">
+            <div>
+              <h2>Ready to get started?</h2>
+              <p>Let’s turn your next idea into something meaningful, memorable, and built for growth.</p>
+            </div>
+            <a class="button button-light" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <a class="brand" href="#home">
+          <span class="brand-mark">E</span>
+          <span>E-Pro</span>
+        </a>
+
+        <span class="copyright">© <span id="year"></span> E-Pro. All rights reserved.</span>
+
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
-    </section>
+    </footer>
 
-    <section class="features" id="features">
-      <div class="container">
-        <div class="section-heading">
-          <h2>Everything starts with the right opportunity.</h2>
-          <p>We combine strategy, clarity, and digital craftsmanship to help you move forward with purpose.</p>
-        </div>
+    <script>
+      const menuButton = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
 
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">✧</div>
-            <h3>Thoughtful Design</h3>
-            <p>Clean, intuitive experiences that help your audience feel confident, informed, and ready to act.</p>
-          </article>
-
-          <article class="feature-card" id="about">
-            <div class="feature-icon" aria-hidden="true">⌘</div>
-            <h3>Smart Solutions</h3>
-            <p>Scalable systems and polished digital products designed around your goals, not guesswork.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">↗</div>
-            <h3>Ready to Grow</h3>
-            <p>A strong foundation that evolves with your ideas, your market, and the next chapter of your business.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="showcase" id="about">
-      <div class="container showcase-grid">
-        <div class="showcase-copy">
-          <h2>Built to help you move faster and stand out.</h2>
-          <p>Whether you’re launching something new or refining what already works, E-Pro brings structure, creativity, and clarity to every part of the journey.</p>
-
-          <ul class="check-list">
-            <li><span class="check">✓</span> Smart digital strategy rooted in your real goals.</li>
-            <li><span class="check">✓</span> Seamless experiences that feel premium and easy to use.</li>
-            <li><span class="check">✓</span> Flexible solutions that grow with your next chapter.</li>
-          </ul>
-        </div>
-
-        <div class="metrics-panel" aria-label="Performance panels">
-          <div class="metric-box primary">
-            <span>Brand impact</span>
-            <strong>+38%</strong>
-            <p>Average lift in engagement after launch.</p>
-          </div>
-
-          <div class="metric-box">
-            <span>Productivity</span>
-            <strong>1.8x</strong>
-            <p>Faster decision-making with streamlined execution.</p>
-          </div>
-
-          <div class="metric-box">
-            <span>Client focus</span>
-            <strong>96%</strong>
-            <p>Clients choose long-term partnerships with us.</p>
-          </div>
-
-          <div class="metric-box">
-            <span>Launch speed</span>
-            <strong>6 wks</strong>
-            <p>Typical timeline to go from concept to live.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta" id="contact">
-      <div class="container">
-        <div class="cta-panel">
-          <div>
-            <h2>Ready to get started?</h2>
-            <p>Let’s turn your next idea into something meaningful, memorable, and built for growth.</p>
-          </div>
-          <a class="button button-light" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <a class="brand" href="#home">
-        <span class="brand-mark">E</span>
-        <span>E-Pro</span>
-      </a>
-
-      <span class="copyright">© <span id="year"></span> E-Pro. All rights reserved.</span>
-
-      <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#features">Features</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const menuButton = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (menuButton && navLinks) {
-      menuButton.addEventListener('click', () => {
-        const isOpen = navLinks.classList.toggle('open');
-        menuButton.setAttribute('aria-expanded', String(isOpen));
-        menuButton.textContent = isOpen ? '✕' : '☰';
-      });
-
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-          menuButton.setAttribute('aria-expanded', 'false');
-          menuButton.textContent = '☰';
+      if (menuButton && navLinks) {
+        menuButton.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open');
+          menuButton.setAttribute('aria-expanded', String(isOpen));
+          menuButton.textContent = isOpen ? '✕' : '☰';
         });
-      });
-    }
 
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-  </script>
-</body>
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.textContent = '☰';
+          });
+        });
+      }
+
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
