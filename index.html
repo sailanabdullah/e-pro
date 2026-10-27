@@ -18,6 +18,10 @@
       --gold: #ffba4a;
       --success: #20a36d;
       --shadow: 0 28px 60px rgba(22, 26, 54, 0.12);
+      --shadow-soft: 0 18px 38px rgba(18, 28, 45, 0.06);
+      --lavender: #f3f0ff;
+      --sky: #edf6ff;
+      --warm: #fff7eb;
     }
 
     * { box-sizing: border-box; }
@@ -495,6 +499,116 @@
       font-size: .72rem;
     }
 
+    .spotlight {
+      background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+    }
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 20px;
+    }
+    .project-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 300px;
+      padding: 28px 24px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+    .project-card.featured {
+      background: linear-gradient(135deg, #1d2349 0%, #2d3f8d 40%, #5a5de8 100%);
+      color: white;
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 24px 52px rgba(49, 60, 130, 0.28);
+    }
+    .project-tag {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .project-card h3 {
+      margin: 18px 0 12px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      letter-spacing: -.04em;
+      line-height: 1.2;
+    }
+    .project-card p {
+      margin: 0;
+      color: inherit;
+      opacity: 0.82;
+    }
+    .project-points {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 10px;
+      font-size: .92rem;
+      font-weight: 600;
+    }
+    .project-points li::before {
+      content: "•";
+      margin-right: 8px;
+      color: #dfe2ff;
+    }
+    .project-preview {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.16);
+    }
+    .project-metric {
+      display: grid;
+      gap: 4px;
+    }
+    .project-metric strong {
+      font-size: 1.5rem;
+      letter-spacing: -.06em;
+    }
+    .project-metric span {
+      opacity: .75;
+      font-size: .8rem;
+    }
+    .mini-badge {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .project-card:not(.featured) .project-tag {
+      background: rgba(91, 93, 232, 0.08);
+      border-color: rgba(91, 93, 232, 0.08);
+      color: var(--primary-dark);
+    }
+    .project-card:not(.featured) .project-points li::before {
+      color: var(--primary);
+    }
+    .project-card:not(.featured) .project-preview {
+      border-top-color: var(--line);
+    }
+    .project-card:not(.featured) .mini-badge {
+      background: rgba(91, 93, 232, 0.08);
+      color: var(--primary-dark);
+    }
+
     .process-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -623,7 +737,8 @@
 
     @media (max-width: 900px) {
       .hero-grid,
-      .showcase-grid {
+      .showcase-grid,
+      .work-grid {
         grid-template-columns: 1fr;
       }
       .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -670,6 +785,7 @@
       <div class="nav-links" id="nav-links">
         <a href="#home">Home</a>
         <a href="#features">Services</a>
+        <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
@@ -683,7 +799,7 @@
         <div class="hero-content">
           <div class="eyebrow"><span class="eyebrow-dot"></span> Your ideas, made real</div>
           <h1>Make your next big idea <span>happen.</span></h1>
-          <p class="hero-copy">A smarter way to turn vision into momentum. E-Pro helps businesses and founders build standout digital experiences that attract attention, build trust, and grow faster.</p>
+          <p class="hero-copy">A smarter way to turn vision into momentum. E-Pro helps businesses and founders build standout digital experiences that attract attention, build trust, and grow faster across every touchpoint.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#features">Explore what we do <span aria-hidden="true">→</span></a>
             <a class="button button-light" href="#about">Discover E-Pro</a>
@@ -771,7 +887,7 @@
         <div class="showcase-copy">
           <div class="eyebrow eyebrow-alt"><span class="eyebrow-dot"></span> Why E-Pro</div>
           <h2>We blend strategy, storytelling, and technical clarity.</h2>
-          <p>Every decision is shaped by your goals, your audience, and the outcome you want to create. We help brands build digital experiences that feel thoughtful, persuasive, and ready to grow.</p>
+          <p>Every decision is shaped by your goals, your audience, and the outcome you want to create. We help brands build digital experiences that feel thoughtful, persuasive, and ready to grow with them.</p>
 
           <div class="check-list">
             <div class="check-item">Brand-first thinking</div>
@@ -806,6 +922,78 @@
               <span class="chip">Efficient</span>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section spotlight" id="work">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow eyebrow-alt"><span class="eyebrow-dot"></span> Recent wins</div>
+          <h2>Designed to convert attention into action.</h2>
+          <p>We build momentum through sharp strategy, thoughtful product thinking, and high-converting experiences.</p>
+        </div>
+
+        <div class="work-grid">
+          <article class="project-card featured">
+            <div class="project-tag">Case study</div>
+            <div>
+              <h3>Northlane Studio</h3>
+              <p>Reframed a creative agency for premium positioning, stronger conversion, and a clearer offer.</p>
+            </div>
+            <ul class="project-points">
+              <li>Positioning refresh</li>
+              <li>Offer architecture</li>
+              <li>Web experience redesign</li>
+            </ul>
+            <div class="project-preview">
+              <div class="project-metric">
+                <strong>+61%</strong>
+                <span>Qualified leads</span>
+              </div>
+              <span class="mini-badge">Launch</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-tag">Growth</div>
+            <div>
+              <h3>Brightfield</h3>
+              <p>Built a cleaner story and more persuasive funnel for a growing B2B brand.</p>
+            </div>
+            <ul class="project-points">
+              <li>Messaging</li>
+              <li>UX refinement</li>
+              <li>Campaign landing pages</li>
+            </ul>
+            <div class="project-preview">
+              <div class="project-metric">
+                <strong>+44%</strong>
+                <span>Engagement</span>
+              </div>
+              <span class="mini-badge">Strategy</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-tag">Launch</div>
+            <div>
+              <h3>Flowly</h3>
+              <p>Transformed an early-stage product site into a polished, trust-building experience.</p>
+            </div>
+            <ul class="project-points">
+              <li>Brand system</li>
+              <li>Landing page</li>
+              <li>Conversion copy</li>
+            </ul>
+            <div class="project-preview">
+              <div class="project-metric">
+                <strong>2.3x</strong>
+                <span>Trials</span>
+              </div>
+              <span class="mini-badge">Design</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -891,7 +1079,7 @@
             <h2>Ready to get started?</h2>
             <p>Let’s turn your next idea into something meaningful.</p>
           </div>
-          <a class="button button-light" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
+          <a class="button button-light" href="mailto:hello@e-pro.studio">Get in touch <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -901,7 +1089,7 @@
     <div class="container footer-inner">
       <a class="brand" href="#home"><span class="brand-mark">E</span><span>E-Pro</span></a>
       <span class="copyright">© <span id="year"></span> E-Pro. All rights reserved.</span>
-      <div class="footer-links"><a href="#home">Home</a><a href="#features">Services</a><a href="#contact">Contact</a></div>
+      <div class="footer-links"><a href="#home">Home</a><a href="#features">Services</a><a href="#work">Work</a><a href="#contact">Contact</a></div>
     </div>
   </footer>
 
@@ -920,7 +1108,7 @@
         link.addEventListener('click', () => {
           navLinks.classList.remove('open');
           menuButton.setAttribute('aria-expanded', 'false');
-          menuButton.textContent = '☰';
+          menuButton.textContent = '��';
         });
       });
     }
