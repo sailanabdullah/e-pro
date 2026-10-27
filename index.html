@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="E-Pro — smart digital solutions for your next big idea.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="E-Pro — smarter digital experiences for bold ideas." />
   <title>E-Pro | Build Something Better</title>
   <style>
     :root {
-      --ink: #172033;
-      --muted: #68738a;
-      --primary: #5b5ce2;
-      --primary-dark: #4445c7;
-      --primary-soft: #eff0ff;
+      --ink: #121c2d;
+      --muted: #61708a;
+      --primary: #5a5de8;
+      --primary-dark: #474bd8;
+      --primary-soft: #eef0ff;
+      --page: #f6f8ff;
       --surface: #ffffff;
-      --page: #f5f7ff;
-      --line: #e8ebf4;
-      --gold: #ffb84d;
-      --success: #1ea97c;
-      --shadow: 0 22px 60px rgba(48, 54, 104, 0.12);
+      --line: #e7ebf5;
+      --gold: #ffba4a;
+      --success: #20a36d;
+      --shadow: 0 28px 60px rgba(22, 26, 54, 0.12);
     }
 
     * { box-sizing: border-box; }
@@ -25,24 +25,24 @@
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
       background: var(--surface);
+      color: var(--ink);
       line-height: 1.6;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
-    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .container { width: min(1170px, calc(100% - 36px)); margin-inline: auto; }
 
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 30;
-      background: rgba(255,255,255,.88);
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.84);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(232,235,244,.85);
+      border-bottom: 1px solid rgba(231, 235, 245, 0.9);
     }
     .nav-inner {
-      min-height: 78px;
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -52,28 +52,27 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-size: 1.34rem;
       font-weight: 800;
-      letter-spacing: -.07em;
+      letter-spacing: -.06em;
+      font-size: 1.35rem;
     }
     .brand-mark {
-      display: grid;
-      place-items: center;
       width: 38px;
       height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--primary), #7678ff);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), #7178ff);
       color: white;
-      box-shadow: 0 12px 24px rgba(91, 92, 226, 0.28);
-      letter-spacing: 0;
+      border-radius: 12px;
       font-weight: 900;
+      box-shadow: 0 14px 24px rgba(91, 93, 232, 0.24);
     }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 28px;
       color: var(--muted);
-      font-size: .94rem;
+      font-size: .95rem;
       font-weight: 600;
     }
     .nav-links a { transition: color .2s ease; }
@@ -84,7 +83,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 20px;
+      padding: 13px 20px;
       border-radius: 12px;
       font-weight: 700;
       transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
@@ -92,25 +91,22 @@
     }
     .button:hover { transform: translateY(-2px); }
     .button-primary {
-      background: linear-gradient(135deg, var(--primary), #6a6ef5);
+      background: linear-gradient(135deg, var(--primary), #6f73ff);
       color: white;
-      box-shadow: 0 12px 24px rgba(91,92,226,.24);
+      box-shadow: 0 16px 28px rgba(90, 93, 232, 0.22);
     }
-    .button-primary:hover {
-      background: linear-gradient(135deg, var(--primary-dark), #5659df);
-    }
+    .button-primary:hover { background: linear-gradient(135deg, var(--primary-dark), #5a5de8); }
     .button-light {
-      background: white;
       color: var(--ink);
+      background: white;
       border: 1px solid var(--line);
-      box-shadow: 0 8px 22px rgba(12, 16, 32, 0.04);
+      box-shadow: 0 8px 18px rgba(18, 28, 45, 0.04);
     }
-
     .menu-toggle {
       display: none;
       border: 1px solid var(--line);
-      background: white;
       border-radius: 10px;
+      background: white;
       padding: 8px 12px;
       font-size: 1.2rem;
       cursor: pointer;
@@ -119,49 +115,49 @@
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 100px 0 62px;
+      padding: 92px 0 66px;
       background:
-        radial-gradient(ellipse at 82% 15%, rgba(120, 121, 255, 0.15) 0%, transparent 30%),
-        linear-gradient(135deg, #f8f9ff 0%, #ffffff 70%);
+        radial-gradient(circle at 78% 20%, rgba(120, 122, 255, 0.16), transparent 25%),
+        linear-gradient(135deg, #f8f9ff 0%, #ffffff 68%);
     }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
       align-items: center;
-      gap: 64px;
+      gap: 62px;
     }
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 7px 12px;
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 800;
       color: var(--primary-dark);
       background: var(--primary-soft);
-      border-radius: 999px;
-      font-size: .82rem;
-      font-weight: 800;
-      letter-spacing: .01em;
+      letter-spacing: .02em;
     }
     .eyebrow-dot {
       width: 7px;
       height: 7px;
-      background: #7778f1;
       border-radius: 50%;
-      box-shadow: 0 0 0 6px rgba(119, 120, 241, 0.12);
+      background: #8084ff;
+      box-shadow: 0 0 0 6px rgba(128,132,255,0.12);
     }
     h1 {
       margin: 22px 0 18px;
       max-width: 640px;
-      font-size: clamp(2.8rem, 5.6vw, 5rem);
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
       line-height: 1.03;
       letter-spacing: -.065em;
     }
     h1 span { color: var(--primary); }
     .hero-copy {
       max-width: 560px;
+      margin: 0 0 28px;
       color: var(--muted);
-      font-size: 1.1rem;
-      margin: 0 0 30px;
+      font-size: 1.08rem;
     }
     .hero-actions {
       display: flex;
@@ -169,36 +165,37 @@
       gap: 12px;
     }
 
-    .mini-stats {
-      list-style: none;
+    .stats {
       display: flex;
       flex-wrap: wrap;
       gap: 18px;
+      list-style: none;
       padding: 0;
       margin: 28px 0 0;
     }
-    .mini-stats li {
-      min-width: 120px;
-      padding: 14px 16px;
+    .stats li {
+      min-width: 136px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.72);
       border: 1px solid var(--line);
       border-radius: 16px;
-      background: rgba(255,255,255,0.6);
-      box-shadow: 0 10px 30px rgba(17, 23, 42, 0.03);
+      box-shadow: 0 10px 22px rgba(18,28,45,0.02);
     }
-    .mini-stats strong {
+    .stats strong {
       display: block;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
+      letter-spacing: -.04em;
       line-height: 1.1;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
     }
-    .mini-stats span {
+    .stats span {
       color: var(--muted);
       font-size: .8rem;
     }
 
     .visual {
       position: relative;
-      min-height: 430px;
+      min-height: 440px;
       display: grid;
       place-items: center;
     }
@@ -206,22 +203,21 @@
       position: relative;
       width: min(470px, 92%);
       padding: 22px;
-      border-radius: 32px;
       border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 32px;
       background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(244,246,255,0.82));
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
-    .dashboard-header {
+    .dash-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
       margin-bottom: 18px;
-      padding: 4px 4px 14px;
+      padding-bottom: 14px;
       border-bottom: 1px solid var(--line);
     }
-    .pill {
+    .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -232,29 +228,24 @@
       font-size: .76rem;
       font-weight: 800;
     }
-    .dots {
+    .dot-group {
       display: flex;
       gap: 6px;
     }
-    .dots span {
+    .dot-group span {
       width: 10px;
       height: 10px;
       border-radius: 50%;
       display: inline-block;
     }
-    .dots span:nth-child(1) { background: #f3b8b8; }
-    .dots span:nth-child(2) { background: #f7d37a; }
-    .dots span:nth-child(3) { background: #8ad0a4; }
+    .dot-group span:nth-child(1) { background: #f3b1b1; }
+    .dot-group span:nth-child(2) { background: #f2d06e; }
+    .dot-group span:nth-child(3) { background: #7ed7a1; }
 
-    .chart-wrap {
-      padding: 8px 8px 0;
-      display: grid;
-      gap: 18px;
-    }
     .chart-box {
       height: 170px;
       border-radius: 22px;
-      background: linear-gradient(180deg, #f3f4fe 0%, #ffffff 100%);
+      background: linear-gradient(180deg, #f3f5ff 0%, #ffffff 100%);
       border: 1px solid var(--line);
       position: relative;
       overflow: hidden;
@@ -263,70 +254,71 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(91,92,226,0.04) 1px, transparent 1px), linear-gradient(to top, rgba(91,92,226,0.04) 1px, transparent 1px);
+      background: linear-gradient(to right, rgba(91,93,232,0.04) 1px, transparent 1px), linear-gradient(to top, rgba(91,93,232,0.04) 1px, transparent 1px);
       background-size: 40px 40px;
     }
     .chart-line {
       position: absolute;
       inset: 18px 14px 18px 14px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(91,92,226,0.1), rgba(91,92,226,0));
-      clip-path: polygon(0 62%, 12% 56%, 25% 68%, 40% 45%, 55% 52%, 72% 32%, 88% 38%, 100% 18%, 100% 100%, 0 100%);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(91,93,232,0.1), rgba(91,93,232,0));
+      clip-path: polygon(0 62%, 12% 57%, 25% 70%, 39% 46%, 55% 52%, 72% 32%, 88% 38%, 100% 16%, 100% 100%, 0 100%);
     }
     .chart-line::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(91,92,226,0.8), transparent 100%);
-      clip-path: polygon(0 62%, 12% 56%, 25% 68%, 40% 45%, 55% 52%, 72% 32%, 88% 38%, 100% 18%, 100% 100%, 0 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(91,93,232,0.9), transparent 100%);
+      clip-path: polygon(0 62%, 12% 57%, 25% 70%, 39% 46%, 55% 52%, 72% 32%, 88% 38%, 100% 16%, 100% 100%, 0 100%);
       mix-blend-mode: multiply;
     }
-    .stat-row {
+    .mini-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
+      margin-top: 16px;
     }
     .mini-panel {
-      border: 1px solid var(--line);
-      background: white;
-      border-radius: 18px;
       padding: 14px 16px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid var(--line);
     }
-    .mini-panel .label {
+    .mini-panel span {
       display: block;
       color: var(--muted);
       font-size: .75rem;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     .mini-panel strong {
       font-size: 1.5rem;
       letter-spacing: -.06em;
     }
-    .mini-panel .trend {
+    .mini-panel small {
       color: var(--success);
       font-weight: 700;
-      font-size: .76rem;
+      font-size: .74rem;
     }
 
-    .floating-card {
+    .float-card {
       position: absolute;
       z-index: 2;
       padding: 14px 18px;
-      border: 1px solid rgba(255,255,255,.85);
       border-radius: 18px;
-      background: rgba(255,255,255,.9);
-      box-shadow: 0 18px 40px rgba(30,35,60,.12);
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 18px 40px rgba(30,36,58,0.12);
       backdrop-filter: blur(10px);
     }
-    .floating-card strong {
+    .float-card strong {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: .98rem;
+      font-size: .96rem;
     }
-    .floating-card small { color: var(--muted); }
-    .card-top { top: 28px; right: 16px; }
-    .card-bottom { bottom: 24px; left: 12px; }
+    .float-card small { color: var(--muted); }
+    .card-top { top: 30px; right: 8px; }
+    .card-bottom { bottom: 22px; left: 10px; }
     .mini-icon {
       display: inline-grid;
       place-items: center;
@@ -339,58 +331,59 @@
     }
 
     .trust-strip {
-      border-top: 1px solid rgba(232,235,244,.9);
-      border-bottom: 1px solid rgba(232,235,244,.9);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
       background: #fafbff;
     }
     .logo-row {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 24px 32px;
+      gap: 24px 34px;
       padding: 22px 0;
-      color: #909ab0;
+      color: #9aa5b8;
       font-weight: 800;
       letter-spacing: .08em;
       text-transform: uppercase;
-      font-size: .76rem;
+      font-size: .74rem;
     }
 
-    .features, .showcase, .process, .testimonials {
+    .section {
       padding: 86px 0;
     }
     .section-heading {
       max-width: 700px;
-      margin: 0 auto 40px;
+      margin: 0 auto 42px;
       text-align: center;
     }
     .section-heading h2 {
       margin: 0 0 10px;
-      font-size: clamp(2rem, 3.1vw, 3rem);
+      font-size: clamp(2.1rem, 3vw, 3rem);
+      line-height: 1.15;
       letter-spacing: -.055em;
-      line-height: 1.14;
     }
     .section-heading p {
       margin: 0;
       color: var(--muted);
     }
+
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 20px;
     }
     .feature-card {
       padding: 28px 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
-      box-shadow: 0 14px 32px rgba(17, 23, 42, 0.02);
+      box-shadow: 0 14px 32px rgba(17,23,42,0.02);
       transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
     }
     .feature-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(91,92,226,0.25);
-      box-shadow: 0 20px 40px rgba(91,92,226,0.09);
+      border-color: rgba(91,93,232,0.22);
+      box-shadow: 0 20px 40px rgba(91,93,232,0.08);
     }
     .feature-icon {
       display: grid;
@@ -399,14 +392,14 @@
       height: 52px;
       margin-bottom: 18px;
       border-radius: 16px;
-      background: linear-gradient(135deg, #eeeefe, #e6f0ff);
+      background: linear-gradient(135deg, #efefff, #e7f2ff);
       color: var(--primary);
       font-size: 1.35rem;
       font-weight: 800;
     }
     .feature-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.18rem;
+      margin: 0 0 8px;
+      font-size: 1.14rem;
     }
     .feature-card p {
       margin: 0;
@@ -424,31 +417,30 @@
       align-items: center;
     }
     .eyebrow-alt {
-      background: #f6f1ff;
-      color: #6548c8;
+      background: #f5f1ff;
+      color: #634ec8;
     }
     .showcase-copy h2 {
       margin: 18px 0 18px;
-      font-size: clamp(2.1rem, 3.2vw, 3rem);
+      font-size: clamp(2.1rem, 3vw, 3rem);
       line-height: 1.15;
       letter-spacing: -.06em;
     }
     .showcase-copy p {
-      color: var(--muted);
       margin: 0 0 24px;
-      max-width: 530px;
+      color: var(--muted);
+      max-width: 540px;
     }
     .check-list {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 22px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px 18px;
     }
     .check-item {
       display: flex;
       align-items: center;
       gap: 10px;
       font-weight: 700;
-      color: var(--ink);
     }
     .check-item::before {
       content: "✓";
@@ -457,7 +449,7 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: rgba(30,169,124,0.12);
+      background: rgba(32,163,109,0.12);
       color: var(--success);
       font-size: .8rem;
       font-weight: 900;
@@ -465,9 +457,9 @@
 
     .showcase-panel {
       padding: 28px;
+      background: white;
       border: 1px solid var(--line);
       border-radius: 28px;
-      background: white;
       box-shadow: var(--shadow);
     }
     .metric-list {
@@ -480,7 +472,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 14px 16px;
+      padding: 15px 16px;
       border-radius: 16px;
       background: linear-gradient(180deg, #fafbff 0%, #ffffff 100%);
       border: 1px solid var(--line);
@@ -497,7 +489,7 @@
     .chip {
       padding: 7px 10px;
       border-radius: 999px;
-      background: rgba(91,92,226,0.08);
+      background: rgba(91,93,232,0.08);
       color: var(--primary-dark);
       font-weight: 800;
       font-size: .72rem;
@@ -505,7 +497,7 @@
 
     .process-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 20px;
     }
     .step-card {
@@ -516,20 +508,20 @@
       background: white;
     }
     .step-number {
+      width: 42px;
+      height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 42px;
-      height: 42px;
+      margin-bottom: 18px;
       border-radius: 12px;
-      margin-bottom: 20px;
-      background: rgba(91,92,226,0.1);
+      background: rgba(91,93,232,0.1);
       color: var(--primary);
       font-weight: 900;
     }
     .step-card h3 {
       margin: 0 0 8px;
-      font-size: 1.2rem;
+      font-size: 1.18rem;
     }
     .step-card p {
       margin: 0;
@@ -541,26 +533,24 @@
     }
     .testimonial-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 20px;
     }
     .quote-card {
       padding: 24px;
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: #fff;
-      box-shadow: 0 12px 28px rgba(17, 23, 42, 0.02);
+      background: white;
+      box-shadow: 0 12px 30px rgba(17,23,42,0.02);
     }
     .stars {
       color: var(--gold);
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       margin-bottom: 12px;
-      font-size: 1rem;
     }
     .quote-card p {
       margin: 0 0 18px;
       color: var(--ink);
-      font-size: 1rem;
     }
     .person {
       display: flex;
@@ -572,10 +562,10 @@
     .avatar {
       width: 42px;
       height: 42px;
-      border-radius: 50%;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #e8ebff, #dfe9ff);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ebedff, #dfe9ff);
       color: var(--primary);
       font-weight: 800;
     }
@@ -583,18 +573,18 @@
     .person small { color: var(--muted); }
 
     .cta {
-      padding: 0 0 82px;
+      padding: 0 0 80px;
     }
     .cta-panel {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 28px;
       padding: 38px 42px;
       border-radius: 30px;
       color: white;
-      background: linear-gradient(120deg, #5257d8, #7a7ef7 62%, #8d8ef4);
-      box-shadow: 0 25px 60px rgba(88, 93, 216, 0.28);
+      background: linear-gradient(120deg, #5158d8, #7c80f6 58%, #8d8ef4);
+      box-shadow: 0 26px 56px rgba(88, 92, 216, 0.28);
     }
     .cta-panel h2 {
       margin: 0 0 8px;
@@ -603,19 +593,19 @@
     }
     .cta-panel p {
       margin: 0;
-      color: rgba(255,255,255,0.82);
+      color: rgba(255,255,255,0.8);
     }
     .cta-panel .button { flex-shrink: 0; }
 
     footer {
       border-top: 1px solid var(--line);
-      padding: 28px 0 36px;
+      padding: 28px 0 34px;
       background: white;
     }
     .footer-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
     }
     .copyright {
@@ -624,35 +614,25 @@
     }
     .footer-links {
       display: flex;
+      align-items: center;
       gap: 22px;
       color: var(--muted);
-      font-size: .9rem;
       font-weight: 600;
+      font-size: .9rem;
     }
 
     @media (max-width: 900px) {
       .hero-grid,
-      .showcase-grid,
-      .feature-grid,
-      .process-grid,
-      .testimonial-grid {
-        grid-template-columns: 1fr 1fr;
+      .showcase-grid {
+        grid-template-columns: 1fr;
       }
-      .feature-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
-      .hero { padding-top: 72px; }
-      .visual { min-height: 360px; }
-      .showcase-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process-grid, .testimonial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cta-panel { flex-direction: column; align-items: flex-start; }
     }
 
     @media (max-width: 700px) {
-      .feature-grid,
-      .process-grid,
-      .testimonial-grid,
-      .check-list {
-        grid-template-columns: 1fr;
-      }
+      .feature-grid, .process-grid, .testimonial-grid, .check-list { grid-template-columns: 1fr; }
       .nav-inner { min-height: 68px; flex-wrap: wrap; padding: 12px 0; }
       .menu-toggle { display: block; }
       .nav-links {
@@ -666,16 +646,14 @@
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px 4px; }
       .nav-cta { display: none; }
-      .hero { padding-top: 56px; }
-      h1 { font-size: clamp(2.5rem, 12vw, 3.8rem); }
-      .hero-copy { font-size: 1rem; }
-      .mini-stats { display: grid; grid-template-columns: repeat(2, 1fr); }
-      .floating-card { padding: 10px 12px; }
-      .card-top { right: 0px; top: 10px; }
-      .card-bottom { left: 0px; bottom: 10px; }
-      .dashboard { padding: 18px; }
-      .cta-panel { padding: 28px 26px; }
+      .hero { padding-top: 52px; }
+      .float-card { padding: 10px 12px; }
+      .card-top { top: 10px; right: 0; }
+      .card-bottom { left: 0; bottom: 10px; }
+      .logo-row { gap: 14px 18px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+      .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cta-panel { padding: 28px 26px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -705,50 +683,47 @@
         <div class="hero-content">
           <div class="eyebrow"><span class="eyebrow-dot"></span> Your ideas, made real</div>
           <h1>Make your next big idea <span>happen.</span></h1>
-          <p class="hero-copy">A smarter way to bring your ideas to life. E-Pro helps founders, teams, and growing brands turn vision into polished digital experiences that move people and momentum.</p>
+          <p class="hero-copy">A smarter way to turn vision into momentum. E-Pro helps businesses and founders build standout digital experiences that attract attention, build trust, and grow faster.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#features">Explore what we do <span aria-hidden="true">→</span></a>
             <a class="button button-light" href="#about">Discover E-Pro</a>
           </div>
-          <ul class="mini-stats" aria-label="Key outcomes">
+          <ul class="stats" aria-label="Key stats">
             <li><strong>120+</strong><span>Projects launched</span></li>
-            <li><strong>4.9/5</strong><span>Client satisfaction</span></li>
+            <li><strong>4.9/5</strong><span>Client rating</span></li>
             <li><strong>3x</strong><span>Faster execution</span></li>
           </ul>
         </div>
 
-        <div class="visual" aria-label="E-Pro product dashboard preview">
-          <div class="floating-card card-top"><strong><span class="mini-icon">✦</span>Creative thinking</strong><small>Ideas into action</small></div>
-          <div class="dashboard">
-            <div class="dashboard-header">
-              <span class="pill">Live growth dashboard</span>
-              <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-            </div>
+        <div class="visual" aria-label="E-Pro product overview">
+          <div class="float-card card-top"><strong><span class="mini-icon">✦</span>Creative thinking</strong><small>Ideas into action</small></div>
 
-            <div class="chart-wrap">
-              <div class="chart-box">
-                <div class="chart-line" aria-hidden="true"></div>
+          <div class="dashboard">
+            <div class="dash-top">
+              <span class="badge">Live growth dashboard</span>
+              <div class="dot-group" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <div class="chart-box"><div class="chart-line" aria-hidden="true"></div></div>
+            <div class="mini-grid">
+              <div class="mini-panel">
+                <span>Conversion uplift</span>
+                <strong>+38%</strong>
+                <small>↑ 12.4%</small>
               </div>
-              <div class="stat-row">
-                <div class="mini-panel">
-                  <span class="label">Conversion uplift</span>
-                  <strong>+38%</strong>
-                  <div class="trend">↑ 12.4% this month</div>
-                </div>
-                <div class="mini-panel">
-                  <span class="label">New leads</span>
-                  <strong>2.8k</strong>
-                  <div class="trend">↑ 26% vs last month</div>
-                </div>
+              <div class="mini-panel">
+                <span>Leads generated</span>
+                <strong>2.8k</strong>
+                <small>↑ 26%</small>
               </div>
             </div>
           </div>
-          <div class="floating-card card-bottom"><strong><span class="mini-icon">↗</span>Made for growth</strong><small>Built around your goals</small></div>
+
+          <div class="float-card card-bottom"><strong><span class="mini-icon">↗</span>Made for growth</strong><small>Built around your goals</small></div>
         </div>
       </div>
     </section>
 
-    <div class="trust-strip" aria-label="Trusted by teams and founders">
+    <div class="trust-strip" aria-label="Trusted by modern teams">
       <div class="container logo-row">
         <span>Strategy</span>
         <span>Brand</span>
@@ -759,55 +734,55 @@
       </div>
     </div>
 
-    <section class="features" id="features">
+    <section class="section" id="features">
       <div class="container">
         <div class="section-heading">
           <h2>Everything starts with a good idea.</h2>
-          <p>We bring clarity, creativity, and care to every step of your digital journey.</p>
+          <p>We turn complexity into clarity through strategy, design, and execution.</p>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">✧</div>
             <h3>Brand Strategy</h3>
-            <p>We uncover the story behind your offer and shape a clear message that people remember.</p>
+            <p>Position your business with messaging that connects to your audience and stands out.</p>
           </article>
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">⌘</div>
             <h3>Product Design</h3>
-            <p>Clean, intuitive experiences that bring structure, confidence, and ease to the user journey.</p>
+            <p>Build intuitive experiences that make your offer easier to understand and easier to trust.</p>
           </article>
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">✦</div>
             <h3>Web Experience</h3>
-            <p>Beautifully built interfaces that look premium, perform smoothly, and support real growth.</p>
+            <p>Craft polished digital touchpoints that feel premium, modern, and conversion-ready.</p>
           </article>
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">↗</div>
             <h3>Launch Support</h3>
-            <p>From planning to release, we help you move with confidence and keep momentum after launch.</p>
+            <p>Move from plan to launch with a clear process that keeps your momentum strong.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="showcase" id="about">
+    <section class="section showcase" id="about">
       <div class="container showcase-grid">
         <div class="showcase-copy">
           <div class="eyebrow eyebrow-alt"><span class="eyebrow-dot"></span> Why E-Pro</div>
           <h2>We blend strategy, storytelling, and technical clarity.</h2>
-          <p>Every decision is shaped by the goals behind it — not just aesthetics. We help businesses create digital experiences that feel polished, purposeful, and prepared to scale.</p>
+          <p>Every decision is shaped by your goals, your audience, and the outcome you want to create. We help brands build digital experiences that feel thoughtful, persuasive, and ready to grow.</p>
 
           <div class="check-list">
             <div class="check-item">Brand-first thinking</div>
             <div class="check-item">Clear user journeys</div>
             <div class="check-item">Conversion-focused design</div>
-            <div class="check-item">Modern, responsive builds</div>
+            <div class="check-item">Responsive modern builds</div>
           </div>
         </div>
 
         <div class="showcase-panel">
-          <div class="pill">Performance snapshot</div>
+          <div class="badge">Performance snapshot</div>
           <div class="metric-list">
             <div class="metric-item">
               <div>
@@ -835,38 +810,38 @@
       </div>
     </section>
 
-    <section class="process">
+    <section class="section process">
       <div class="container">
         <div class="section-heading">
           <h2>A clear path from idea to impact.</h2>
-          <p>We keep the process simple, collaborative, and focused on outcomes.</p>
+          <p>Our process keeps things simple, collaborative, and focused on outcomes.</p>
         </div>
 
         <div class="process-grid">
           <article class="step-card">
             <div class="step-number">01</div>
             <h3>Discover</h3>
-            <p>We listen closely, map your goals, and clarify the problem you want to solve before designing anything.</p>
+            <p>We listen closely, map your goals, and define the problem worth solving before we design.</p>
           </article>
           <article class="step-card">
             <div class="step-number">02</div>
             <h3>Design</h3>
-            <p>We shape the experience around your audience with thoughtful visuals, messaging, and user flow.</p>
+            <p>We shape the experience around your audience with thoughtful visuals, messaging, and flow.</p>
           </article>
           <article class="step-card">
             <div class="step-number">03</div>
             <h3>Launch</h3>
-            <p>We refine, test, and deliver a polished digital presence ready to perform as soon as it goes live.</p>
+            <p>We refine, test, and deliver a polished digital presence ready to perform from day one.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="testimonials">
+    <section class="section testimonials">
       <div class="container">
         <div class="section-heading">
           <h2>People love how we make it feel easy.</h2>
-          <p>Our work helps teams move from uncertainty to momentum.</p>
+          <p>We help teams move from uncertainty to momentum with confidence.</p>
         </div>
 
         <div class="testimonial-grid">
@@ -951,9 +926,7 @@
     }
 
     const yearEl = document.getElementById('year');
-    if (yearEl) {
-      yearEl.textContent = new Date().getFullYear();
-    }
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
