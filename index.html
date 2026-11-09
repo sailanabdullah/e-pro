@@ -10,23 +10,23 @@
     <title>E-Pro | Digital Growth Studio</title>
     <style>
       :root {
-        --ink: #131b2d;
-        --ink-2: #212d46;
-        --muted: #68738b;
+        --ink: #141b2d;
+        --ink-2: #24314c;
+        --muted: #65708a;
         --primary: #5757f5;
-        --primary-strong: #4047d9;
-        --primary-soft: #eef0ff;
-        --accent: #ffb76a;
-        --accent-soft: #fff4df;
+        --primary-strong: #3d47d8;
+        --primary-soft: #eef1ff;
+        --accent: #ffb865;
+        --accent-soft: #fff1dd;
         --surface: #ffffff;
-        --surface-alt: #f7f8ff;
-        --page: #f4f6ff;
+        --surface-alt: #f6f8ff;
+        --page: #f4f7ff;
         --line: #e8ebf5;
-        --success: #22b67d;
+        --success: #1eb77d;
         --success-soft: #eafaf3;
-        --warning: #ff8a5b;
-        --shadow: 0 26px 70px rgba(30, 41, 78, 0.12);
-        --shadow-soft: 0 18px 36px rgba(17, 24, 39, 0.06);
+        --warning: #ff8b5e;
+        --shadow: 0 26px 70px rgba(20, 27, 45, 0.12);
+        --shadow-soft: 0 18px 35px rgba(17, 24, 39, 0.06);
         --radius: 24px;
         --radius-lg: 32px;
         --max: 1200px;
@@ -38,7 +38,7 @@
         margin: 0;
         font-family: Inter, "Segoe UI", sans-serif;
         color: var(--ink);
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+        background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
         line-height: 1.6;
       }
 
@@ -49,7 +49,7 @@
         background:
           radial-gradient(circle at 12% 8%, rgba(87, 87, 245, 0.12), transparent 18%),
           radial-gradient(circle at 78% 18%, rgba(255, 183, 106, 0.14), transparent 16%),
-          radial-gradient(circle at 90% 75%, rgba(87, 87, 245, 0.08), transparent 24%);
+          radial-gradient(circle at 90% 78%, rgba(87, 87, 245, 0.08), transparent 24%);
         pointer-events: none;
         z-index: -1;
       }
@@ -68,10 +68,10 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        background: rgba(255,255,255,0.75);
+        background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
-        border-bottom: 1px solid rgba(232, 235, 245, 0.9);
+        border-bottom: 1px solid rgba(232, 235, 245, 0.95);
       }
 
       .nav-inner {
@@ -97,7 +97,7 @@
         display: grid;
         place-items: center;
         border-radius: 12px;
-        background: linear-gradient(135deg, var(--primary), #7d80ff);
+        background: linear-gradient(135deg, var(--primary), #7b80ff);
         color: white;
         box-shadow: 0 10px 24px rgba(87, 87, 245, 0.25);
       }
@@ -151,20 +151,26 @@
       .button:hover { transform: translateY(-2px); }
 
       .button-primary {
-        background: linear-gradient(135deg, var(--primary), #7b7df8);
+        background: linear-gradient(135deg, var(--primary), #7d80ff);
         color: white;
         box-shadow: 0 18px 30px rgba(87, 87, 245, 0.2);
       }
 
       .button-primary:hover {
-        background: linear-gradient(135deg, var(--primary-strong), #5c5fe5);
+        background: linear-gradient(135deg, var(--primary-strong), #5d62e7);
       }
 
       .button-light {
         background: white;
         border-color: var(--line);
         color: var(--ink);
-        box-shadow: 0 12px 26px rgba(17,24,39,0.04);
+        box-shadow: 0 12px 26px rgba(17, 24, 39, 0.03);
+      }
+
+      .button-secondary {
+        background: var(--primary-soft);
+        border-color: rgba(87, 87, 245, 0.12);
+        color: var(--primary-strong);
       }
 
       .menu-toggle {
@@ -296,7 +302,7 @@
         width: min(420px, 82vw);
         aspect-ratio: 1;
         border-radius: 35% 65% 60% 40% / 40% 38% 62% 60%;
-        background: linear-gradient(145deg, #8a8dff 0%, #5d63f2 42%, #3d41b7 100%);
+        background: linear-gradient(145deg, #8f90ff 0%, #5a60f5 42%, #3d41b7 100%);
         transform: rotate(-10deg);
         box-shadow: 0 40px 90px rgba(92, 97, 225, 0.35);
         animation: float 5.5s ease-in-out infinite;
@@ -311,7 +317,7 @@
       .orb::after {
         content: "";
         position: absolute;
-        border: 1px solid rgba(255,255,255,0.5);
+        border: 1px solid rgba(255,255,255,0.48);
         border-radius: 50%;
         inset: 11%;
         transform: rotate(32deg) scaleX(0.62);
@@ -376,7 +382,7 @@
       .card-bottom { left: 18px; bottom: 26px; }
 
       .brands {
-        padding: 10px 0 22px;
+        padding: 12px 0 22px;
       }
 
       .brand-row {
@@ -395,26 +401,31 @@
         align-items: center;
         justify-content: center;
         min-height: 52px;
-        color: #7d879d;
+        color: #7a869e;
         font-size: 0.75rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         font-weight: 800;
       }
 
-      .features {
-        padding: 92px 0 26px;
+      .features,
+      .showcase,
+      .process,
+      .testimonials,
+      .pricing,
+      .cta {
+        padding-top: 90px;
       }
 
       .section-heading {
-        max-width: 720px;
+        max-width: 760px;
         margin: 0 auto 42px;
         text-align: center;
       }
 
       .section-heading h2 {
         margin: 0 0 12px;
-        font-size: clamp(2.2rem, 3vw, 3rem);
+        font-size: clamp(2.3rem, 3vw, 3rem);
         letter-spacing: -0.06em;
         line-height: 1.12;
       }
@@ -454,7 +465,7 @@
         place-items: center;
         margin-bottom: 18px;
         border-radius: 18px;
-        background: linear-gradient(135deg, #f0f1ff, #e8eaff);
+        background: linear-gradient(135deg, #f0f1ff, #e8ebff);
         color: var(--primary);
         font-size: 1.4rem;
         font-weight: 800;
@@ -470,10 +481,6 @@
         margin: 0;
         color: var(--muted);
         font-size: 0.96rem;
-      }
-
-      .showcase {
-        padding: 96px 0 24px;
       }
 
       .showcase-grid {
@@ -543,7 +550,7 @@
       }
 
       .metric-box.primary {
-        background: linear-gradient(135deg, #5a5eea, #7f81f9 60%, #8b7cff);
+        background: linear-gradient(135deg, #5a5eea, #7f81f9 60%, #8c7cff);
         color: white;
         display: flex;
         flex-direction: column;
@@ -581,12 +588,6 @@
         color: rgba(255,255,255,0.82);
       }
 
-      .process,
-      .testimonials,
-      .pricing {
-        padding: 78px 0 10px;
-      }
-
       .process-grid,
       .pricing-grid {
         display: grid;
@@ -594,12 +595,17 @@
         gap: 24px;
       }
 
-      .process-card {
-        padding: 28px 24px;
+      .process-card,
+      .testimonial,
+      .pricing-card {
         border: 1px solid var(--line);
         border-radius: 24px;
         background: white;
         box-shadow: var(--shadow-soft);
+      }
+
+      .process-card {
+        padding: 28px 24px;
       }
 
       .step {
@@ -634,10 +640,6 @@
 
       .testimonial {
         padding: 28px;
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        background: white;
-        box-shadow: var(--shadow-soft);
       }
 
       .stars {
@@ -665,7 +667,7 @@
         display: grid;
         place-items: center;
         border-radius: 50%;
-        background: linear-gradient(135deg, #eff1ff, #e5e7ff);
+        background: linear-gradient(135deg, #eff1ff, #e5e8ff);
         color: var(--primary);
         font-weight: 900;
       }
@@ -686,10 +688,6 @@
         flex-direction: column;
         min-height: 100%;
         padding: 30px 26px 24px;
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        background: white;
-        box-shadow: var(--shadow-soft);
       }
 
       .pricing-card.featured {
@@ -774,10 +772,6 @@
 
       .pricing-card .button {
         margin-top: auto;
-      }
-
-      .cta {
-        padding: 72px 0 86px;
       }
 
       .cta-panel {
@@ -914,7 +908,7 @@
           <a href="#contact">Contact</a>
         </div>
 
-        <a class="button button-primary nav-cta" href="#contact">Let's Talk <span aria-hidden="true">↗</span></a>
+        <a class="button button-primary nav-cta" href="#contact">Let’s Talk <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
 
@@ -999,65 +993,58 @@
 
           <div class="feature-grid">
             <article class="feature-card">
-              <div class="icon" aria-hidden="true">✧</div>
+              <div class="icon">01</div>
               <h3>Brand Strategy</h3>
-              <p>Positioning, messaging, and visual direction that makes your business clearer, stronger, and more memorable.</p>
+              <p>Positioning, messaging, and growth planning that makes your brand clear, differentiated, and memorable.</p>
             </article>
-
-            <article class="feature-card" id="about">
-              <div class="icon" aria-hidden="true">⌘</div>
-              <h3>Digital Products</h3>
-              <p>High-converting landing pages, web experiences, and product touchpoints built around real user needs.</p>
-            </article>
-
             <article class="feature-card">
-              <div class="icon" aria-hidden="true">↗</div>
+              <div class="icon">02</div>
+              <h3>UI/UX Design</h3>
+              <p>Thoughtful interfaces and conversion-focused experiences built around how people actually think and act.</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">03</div>
               <h3>Growth Systems</h3>
-              <p>Operational clarity, smarter funnels, and scalable experiences designed to support consistent momentum.</p>
+              <p>Landing pages, funnels, and digital systems designed to help your business scale with confidence.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="showcase">
+      <section class="showcase" id="about">
         <div class="container showcase-grid">
           <div class="showcase-copy">
-            <h2>Built to help you move faster and stand out.</h2>
+            <h2>Built for brands that want traction, not just aesthetics.</h2>
             <p>
-              Whether you are launching a business, refreshing your presence, or building a stronger product story, E-Pro delivers
-              structure, beauty, and measurable results from the first idea to final execution.
+              We work like a focused digital partner — strategic, hands-on, and outcome-driven. Whether you’re refining your message or scaling a new offer, our process keeps your goals front and center.
             </p>
-
             <ul class="check-list">
-              <li><span class="check">✓</span> Strategic thinking rooted in your real goals.</li>
-              <li><span class="check">✓</span> Premium user experiences built to feel intuitive.</li>
-              <li><span class="check">✓</span> Flexible systems that support long-term growth.</li>
+              <li><span class="check">✓</span> Clarified messaging that speaks directly to the right audience.</li>
+              <li><span class="check">✓</span> Smart design systems that feel premium and convert better.</li>
+              <li><span class="check">✓</span> Growth-focused execution that removes friction and builds trust.</li>
             </ul>
           </div>
 
-          <div class="metrics-panel" aria-label="Performance panels">
+          <div class="metrics-panel" aria-label="Agency results panel">
             <div class="metric-box primary">
-              <span>Brand impact</span>
-              <strong>+38%</strong>
-              <p>Average lift in engagement after launch.</p>
+              <span>Impact</span>
+              <strong>3.2x</strong>
+              <p>Average lift in qualified leads after strategic redesigns.</p>
             </div>
-
             <div class="metric-box">
-              <span>Productivity</span>
-              <strong>1.8x</strong>
-              <p>Faster decisions and smoother execution.</p>
+              <span>Engagement</span>
+              <strong>84%</strong>
+              <p>Average increase in user interaction from cleaner UX flows.</p>
             </div>
-
             <div class="metric-box">
-              <span>Client focus</span>
-              <strong>96%</strong>
-              <p>Clients stay with us for the long term.</p>
+              <span>Delivery</span>
+              <strong>12 wk</strong>
+              <p>Typical sprint from discovery to launch with a clear roadmap.</p>
             </div>
-
             <div class="metric-box">
-              <span>Launch speed</span>
-              <strong>6 wks</strong>
-              <p>A realistic path from concept to live.</p>
+              <span>Retention</span>
+              <strong>92%</strong>
+              <p>Clients return for growth optimization, campaigns, and product iterations.</p>
             </div>
           </div>
         </div>
@@ -1066,27 +1053,25 @@
       <section class="process">
         <div class="container">
           <div class="section-heading">
-            <h2>Our process keeps momentum clear.</h2>
-            <p>From strategy to launch, every step is designed to reduce noise and create meaningful progress.</p>
+            <h2>How we move from idea to momentum</h2>
+            <p>Simple, strategic, and built for businesses that want to grow without the guesswork.</p>
           </div>
 
           <div class="process-grid">
             <article class="process-card">
               <div class="step">1</div>
               <h3>Discover</h3>
-              <p>We align around your audience, goals, and opportunities so every decision is grounded in value.</p>
+              <p>We learn your goals, your audience, and the opportunities that matter most to your next phase of growth.</p>
             </article>
-
             <article class="process-card">
               <div class="step">2</div>
               <h3>Design</h3>
-              <p>We shape a clear experience, refine the details, and build something memorable without the clutter.</p>
+              <p>We shape your message, visual identity, and digital experience into a clear and confident brand story.</p>
             </article>
-
             <article class="process-card">
               <div class="step">3</div>
-              <h3>Deliver</h3>
-              <p>We move from concept to launch with precision, flexibility, and a strong base for continued growth.</p>
+              <h3>Launch</h3>
+              <p>We deliver polished assets and systems that are ready to perform in the market and support growth.</p>
             </article>
           </div>
         </div>
@@ -1095,43 +1080,43 @@
       <section class="testimonials">
         <div class="container">
           <div class="section-heading">
-            <h2>Clients trust us to turn ambition into momentum.</h2>
-            <p>We create meaningful experiences that help businesses look sharper, feel stronger, and perform better.</p>
+            <h2>Trusted by teams building real momentum</h2>
+            <p>Partnerships built on clarity, communication, and measurable progress.</p>
           </div>
 
           <div class="testimonials-grid">
             <article class="testimonial">
-              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <p>“E-Pro gave our brand clarity, confidence, and the kind of digital experience people remember. The process was strategic and refreshingly focused.”</p>
+              <div class="stars">★★★★★</div>
+              <p>“E-Pro gave our brand the clarity and polish we needed to launch with confidence. The process felt thoughtful and strategic from day one.”</p>
               <div class="person">
-                <div class="avatar">MJ</div>
+                <div class="avatar">A</div>
                 <div>
-                  <strong>Maria James</strong>
+                  <strong>Alicia Reed</strong>
                   <span>Founder, Northstar</span>
                 </div>
               </div>
             </article>
 
             <article class="testimonial">
-              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <p>“The work felt premium from start to finish. We launched faster, communicated more clearly, and saw a stronger response immediately.”</p>
+              <div class="stars">★★★★★</div>
+              <p>“They transformed our website from a generic presence into a real growth engine. Clean, premium, and incredibly effective.”</p>
               <div class="person">
-                <div class="avatar">RA</div>
+                <div class="avatar">M</div>
                 <div>
-                  <strong>Ravi Ali</strong>
+                  <strong>Marcus Lee</strong>
                   <span>CEO, Peaklab</span>
                 </div>
               </div>
             </article>
 
             <article class="testimonial">
-              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <p>“They understood our goals and designed a digital presence that actually supported our growth. The result felt polished and practical.”</p>
+              <div class="stars">★★★★★</div>
+              <p>“The attention to detail, conversion-focused thinking, and communication were exceptional. We saw traction quickly.”</p>
               <div class="person">
-                <div class="avatar">SL</div>
+                <div class="avatar">S</div>
                 <div>
-                  <strong>Sophia Lee</strong>
-                  <span>Co-founder, Aster</span>
+                  <strong>Sophia Chen</strong>
+                  <span>Marketing Lead, Vantage</span>
                 </div>
               </div>
             </article>
@@ -1142,48 +1127,51 @@
       <section class="pricing" id="pricing">
         <div class="container">
           <div class="section-heading">
-            <h2>Flexible options for every stage of growth.</h2>
-            <p>Choose a package that fits your goals, timeline, and level of digital ambition.</p>
+            <h2>Simple pricing for focused growth</h2>
+            <p>Choose the support level that matches your next move.</p>
           </div>
 
           <div class="pricing-grid">
             <article class="pricing-card">
               <span class="tag">Starter</span>
               <h3>Launch</h3>
-              <div class="price"><strong>$599</strong><span>/project</span></div>
-              <p>Perfect for new ideas that need a sharper digital first impression.</p>
+              <div class="price"><strong>$899</strong><span>/ project</span></div>
+              <p>Great for new brands or focused digital refreshes.</p>
               <ul class="pricing-list">
+                <li>Brand direction</li>
                 <li>Landing page design</li>
-                <li>Brand messaging direction</li>
-                <li>Basic conversion structure</li>
+                <li>Copy guidance</li>
+                <li>Launch support</li>
               </ul>
-              <a class="button button-light" href="#contact">Get started</a>
+              <a class="button button-light" href="#contact">Book a call</a>
             </article>
 
             <article class="pricing-card featured">
-              <span class="tag">Most Popular</span>
+              <span class="tag">Most popular</span>
               <h3>Growth</h3>
-              <div class="price"><strong>$1,299</strong><span>/project</span></div>
-              <p>A complete digital package for brands ready to scale with clarity.</p>
+              <div class="price"><strong>$1,900</strong><span>/ project</span></div>
+              <p>Best for ambitious teams ready to build real momentum.</p>
               <ul class="pricing-list">
-                <li>Full website or funnel build</li>
-                <li>Design system and UX flow</li>
-                <li>Conversion-focused structure</li>
+                <li>Full strategy sprint</li>
+                <li>Conversion-focused design</li>
+                <li>UX + messaging improvements</li>
+                <li>Priority collaboration</li>
               </ul>
-              <a class="button button-primary" href="#contact">Book a call</a>
+              <a class="button button-primary" href="#contact">Get started</a>
             </article>
 
             <article class="pricing-card">
-              <span class="tag">Premium</span>
-              <h3>Scale</h3>
-              <div class="price"><strong>$2,499</strong><span>/project</span></div>
-              <p>For teams seeking a stronger market presence and more advanced digital growth.</p>
+              <span class="tag">Scale</span>
+              <h3>Retainer</h3>
+              <div class="price"><strong>$2,800</strong><span>/ month</span></div>
+              <p>Ongoing design and growth support for teams in motion.</p>
               <ul class="pricing-list">
-                <li>Strategy + design + build</li>
-                <li>Advanced content structure</li>
-                <li>Priority collaboration support</li>
+                <li>Monthly optimizations</li>
+                <li>Campaign creative</li>
+                <li>Analytics guidance</li>
+                <li>Continuous iteration</li>
               </ul>
-              <a class="button button-light" href="#contact">Get quote</a>
+              <a class="button button-light" href="#contact">Talk strategy</a>
             </article>
           </div>
         </div>
@@ -1193,10 +1181,10 @@
         <div class="container">
           <div class="cta-panel">
             <div>
-              <h2>Ready to make your next move?</h2>
-              <p>Let’s turn your next idea into something meaningful, memorable, and built for growth.</p>
+              <h2>Ready to build something that feels premium and performs?</h2>
+              <p>Let’s create a digital presence that makes your next growth move feel obvious.</p>
             </div>
-            <a class="button button-light" href="mailto:hello@example.com">Get in touch <span aria-hidden="true">↗</span></a>
+            <a class="button button-light" href="mailto:hello@e-pro.example">hello@e-pro.example</a>
           </div>
         </div>
       </section>
@@ -1204,43 +1192,33 @@
 
     <footer>
       <div class="container footer-inner">
-        <a class="brand" href="#home">
-          <span class="brand-mark">E</span>
-          <span>E-Pro</span>
-        </a>
-
-        <span class="copyright">© <span id="year"></span> E-Pro. All rights reserved.</span>
-
-        <div class="footer-links">
+        <div class="copyright">© 2026 E-Pro. Built for bold ideas.</div>
+        <div class="footer-links" aria-label="Footer navigation">
           <a href="#home">Home</a>
           <a href="#features">Services</a>
-          <a href="#contact">Contact</a>
+          <a href="#about">Why us</a>
+          <a href="#pricing">Pricing</a>
         </div>
       </div>
     </footer>
 
     <script>
-      const menuButton = document.querySelector('.menu-toggle');
-      const navLinks = document.querySelector('.nav-links');
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('nav-links');
 
-      if (menuButton && navLinks) {
-        menuButton.addEventListener('click', () => {
-          const isOpen = navLinks.classList.toggle('open');
-          menuButton.setAttribute('aria-expanded', String(isOpen));
-          menuButton.textContent = isOpen ? '✕' : '☰';
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const isOpen = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(isOpen));
         });
 
-        navLinks.querySelectorAll('a').forEach(link => {
+        nav.querySelectorAll('a').forEach((link) => {
           link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            menuButton.setAttribute('aria-expanded', 'false');
-            menuButton.textContent = '☰';
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
           });
         });
       }
-
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
